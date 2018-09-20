@@ -1,0 +1,821 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AFF8B9E7-AB74-49DA-BA4D-1C4DFE21BC91}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LucidHR</RootNamespace>
+    <AssemblyName>LucidHR</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Simple.ImageResizer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Simple.ImageResizer.2.0.0\lib\Simple.ImageResizer.dll</HintPath>
+    </Reference>
+    <Reference Include="Simple.ImageResizer.MvcExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Simple.ImageResizer.MvcExtensions.1.0.0\lib\net45\Simple.ImageResizer.MvcExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\DepartmentsController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
+    <Compile Include="Controllers\HolidaysController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddedEmp.cs" />
+    <Compile Include="Models\AddedList.cs" />
+    <Compile Include="Models\Attendance.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AttendanceDatas.cs" />
+    <Compile Include="Models\Client.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ClientsProject.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Database.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Database.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Department.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DepSalary.cs" />
+    <Compile Include="Models\Employee.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Event.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventType.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Expens.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Holiday.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Invoice.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LeaveRequest.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LeaveType.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyEvent.cs" />
+    <Compile Include="Models\Payment.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PaymentType.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Project.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Role.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SelectedDepartment.cs" />
+    <Compile Include="Models\Todolist.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>Database.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewHome.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Models\Database.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Database.Context.cs</LastGenOutput>
+      <DependentUpon>Database.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Database.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Database.edmx</DependentUpon>
+      <LastGenOutput>Database.cs</LastGenOutput>
+    </Content>
+    <Content Include="Public\charts\chartist-plugin-tooltip\.gitignore" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\dist\chartist-plugin-tooltip.css" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\dist\chartist-plugin-tooltip.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\dist\chartist-plugin-tooltip.min.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\Gruntfile.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\src\css\chartist-plugin-tooltip.css" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\src\scripts\chartist-plugin-tooltip.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\src\scss\chartist-plugin-tooltip.css" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\tasks\clean.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\tasks\copy.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\tasks\jasmine.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\tasks\jshint.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\tasks\sass.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\tasks\uglify.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\tasks\umd.js" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\test\runner.html" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\test\spec\spec-tooltip.js" />
+    <Content Include="Public\charts\chartist.css" />
+    <Content Include="Public\charts\chartistJs\.gitattributes" />
+    <Content Include="Public\charts\chartistJs\.gitignore" />
+    <Content Include="Public\charts\chartistJs\dist\chartist.css" />
+    <Content Include="Public\charts\chartistJs\dist\chartist.js" />
+    <Content Include="Public\charts\chartistJs\dist\chartist.min.css" />
+    <Content Include="Public\charts\chartistJs\dist\chartist.min.js" />
+    <Content Include="Public\charts\chartistJs\dist\scss\chartist.css" />
+    <Content Include="Public\charts\chartistJs\Gruntfile.js" />
+    <Content Include="Public\charts\chartistJs\site\404.html" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\1-dimension-values.js" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\2-dimensions-values.js" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\aspect-ratio-container.html" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\colour-override-line-chart.css" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\custom-include.css" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\custom-style-bar-chart.css" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\custom-style-donut-chart.css" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\custom-style-line-chart.css" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\custom-style-pie-chart.css" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\plugin-example.js" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\plugin-include.js" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\plugin-signature.js" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\simple-start-aspect-ratio-chart.js" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\simple-start-cdn.html" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\simple-start-fixed-chart.js" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\simple-start.html" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\two-charts.html" />
+    <Content Include="Public\charts\chartistJs\site\examples\bi-polar-bar-interpolated.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-axis-auto.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-axis-fixed-and-auto.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-bar-distributed-series.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-bar-extreme-responsive.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-bar-horizontal.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-bar-label-position.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-bar-with-circle-modify-drawing.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-bipolar-line-area.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-donut-animation.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-donut-solid-chart.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-dynamic-colours.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-gallery-four.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-gallery-one.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-gallery-three.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-gallery-two.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-gauge-donut-solid-chart.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-area.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-data-fill-holes.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-data-holes.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-modify-drawing.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-months-interpolation.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-only-integer.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-path-animation.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-series-override.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-simple-responsive.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-simple-smoothing.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-line-svg-animation.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-multiline-bar.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-plugin-accessibility.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-plugin-axistitle.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-plugin-fill-donut.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-plugin-pointlabel.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-plugin-threshold.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-plugin-tooltip.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-plugin-zoom.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-simple-bar.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-simple-svg-animation.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\example-timeseries-moment.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\line-scatter-random.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\overlapping-bars.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\pie-with-custom-labels.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\simple-configuration-chart.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\simple-gauge-chart.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\simple-line-chart.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\simple-pie-chart.js" />
+    <Content Include="Public\charts\chartistJs\site\examples\stacked-bar.js" />
+    <Content Include="Public\charts\chartistJs\site\favicon.ico" />
+    <Content Include="Public\charts\chartistJs\site\helpers\chartist-helpers.js" />
+    <Content Include="Public\charts\chartistJs\site\helpers\common-helpers.js" />
+    <Content Include="Public\charts\chartistJs\site\helpers\dox-helpers.js" />
+    <Content Include="Public\charts\chartistJs\site\helpers\lorem-helper.js" />
+    <Content Include="Public\charts\chartistJs\site\images\chartist-guy.gif" />
+    <Content Include="Public\charts\chartistJs\site\images\chartist-guy.svg" />
+    <Content Include="Public\charts\chartistJs\site\images\chartist-icon.svg" />
+    <Content Include="Public\charts\chartistJs\site\robots.txt" />
+    <Content Include="Public\charts\chartistJs\site\scripts\chartist-guy.js" />
+    <Content Include="Public\charts\chartistJs\site\scripts\main.js" />
+    <Content Include="Public\charts\chartistJs\site\styles\main.css" />
+    <Content Include="Public\charts\chartistJs\src\scripts\axes\auto-scale-axis.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\axes\axis.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\axes\fixed-scale-axis.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\axes\step-axis.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\base.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\charts\bar.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\charts\line.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\charts\pie.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\class.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\core.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\event.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\interpolation.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\svg-path.js" />
+    <Content Include="Public\charts\chartistJs\src\scripts\svg.js" />
+    <Content Include="Public\charts\chartistJs\src\styles\chartist.css" />
+    <Content Include="Public\charts\chartistJs\tasks\assemble.js" />
+    <Content Include="Public\charts\chartistJs\tasks\clean.js" />
+    <Content Include="Public\charts\chartistJs\tasks\concat.js" />
+    <Content Include="Public\charts\chartistJs\tasks\concurrent.js" />
+    <Content Include="Public\charts\chartistJs\tasks\connect.js" />
+    <Content Include="Public\charts\chartistJs\tasks\copy.js" />
+    <Content Include="Public\charts\chartistJs\tasks\critical.js" />
+    <Content Include="Public\charts\chartistJs\tasks\cssmin.js" />
+    <Content Include="Public\charts\chartistJs\tasks\htmlmin.js" />
+    <Content Include="Public\charts\chartistJs\tasks\imagemin.js" />
+    <Content Include="Public\charts\chartistJs\tasks\jasmine.js" />
+    <Content Include="Public\charts\chartistJs\tasks\jshint.js" />
+    <Content Include="Public\charts\chartistJs\tasks\sass.js" />
+    <Content Include="Public\charts\chartistJs\tasks\svgmin.js" />
+    <Content Include="Public\charts\chartistJs\tasks\template.js" />
+    <Content Include="Public\charts\chartistJs\tasks\uglify.js" />
+    <Content Include="Public\charts\chartistJs\tasks\umd.js" />
+    <Content Include="Public\charts\chartistJs\tasks\usemin.js" />
+    <Content Include="Public\charts\chartistJs\tasks\useminPrepare.js" />
+    <Content Include="Public\charts\chartistJs\tasks\watch.js" />
+    <Content Include="Public\charts\chartistJs\test\runner.html" />
+    <Content Include="Public\charts\chartistJs\test\spec\spec-axes.js" />
+    <Content Include="Public\charts\chartistJs\test\spec\spec-bar-chart.js" />
+    <Content Include="Public\charts\chartistJs\test\spec\spec-base-chart.js" />
+    <Content Include="Public\charts\chartistJs\test\spec\spec-core.js" />
+    <Content Include="Public\charts\chartistJs\test\spec\spec-line-chart.js" />
+    <Content Include="Public\charts\chartistJs\test\spec\spec-pie-chart.js" />
+    <Content Include="Public\charts\chartistJs\test\spec\spec-svg.js" />
+    <Content Include="Public\charts\main.js" />
+    <Content Include="Public\charts\mychartist.css" />
+    <Content Include="Public\charts\style.css" />
+    <Content Include="Public\css\animate.css\.gitignore" />
+    <Content Include="Public\css\animate.css\animate.css" />
+    <Content Include="Public\css\animate.css\animate.min.css" />
+    <Content Include="Public\css\animate.css\gulpfile.js" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\bounce.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\flash.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\headShake.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\heartBeat.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\jello.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\pulse.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\rubberBand.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\shake.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\swing.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\tada.css" />
+    <Content Include="Public\css\animate.css\source\attention_seekers\wobble.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_entrances\bounceIn.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_entrances\bounceInDown.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_entrances\bounceInLeft.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_entrances\bounceInRight.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_entrances\bounceInUp.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_exits\bounceOut.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_exits\bounceOutDown.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_exits\bounceOutLeft.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_exits\bounceOutRight.css" />
+    <Content Include="Public\css\animate.css\source\bouncing_exits\bounceOutUp.css" />
+    <Content Include="Public\css\animate.css\source\fading_entrances\fadeIn.css" />
+    <Content Include="Public\css\animate.css\source\fading_entrances\fadeInDown.css" />
+    <Content Include="Public\css\animate.css\source\fading_entrances\fadeInDownBig.css" />
+    <Content Include="Public\css\animate.css\source\fading_entrances\fadeInLeft.css" />
+    <Content Include="Public\css\animate.css\source\fading_entrances\fadeInLeftBig.css" />
+    <Content Include="Public\css\animate.css\source\fading_entrances\fadeInRight.css" />
+    <Content Include="Public\css\animate.css\source\fading_entrances\fadeInRightBig.css" />
+    <Content Include="Public\css\animate.css\source\fading_entrances\fadeInUp.css" />
+    <Content Include="Public\css\animate.css\source\fading_entrances\fadeInUpBig.css" />
+    <Content Include="Public\css\animate.css\source\fading_exits\fadeOut.css" />
+    <Content Include="Public\css\animate.css\source\fading_exits\fadeOutDown.css" />
+    <Content Include="Public\css\animate.css\source\fading_exits\fadeOutDownBig.css" />
+    <Content Include="Public\css\animate.css\source\fading_exits\fadeOutLeft.css" />
+    <Content Include="Public\css\animate.css\source\fading_exits\fadeOutLeftBig.css" />
+    <Content Include="Public\css\animate.css\source\fading_exits\fadeOutRight.css" />
+    <Content Include="Public\css\animate.css\source\fading_exits\fadeOutRightBig.css" />
+    <Content Include="Public\css\animate.css\source\fading_exits\fadeOutUp.css" />
+    <Content Include="Public\css\animate.css\source\fading_exits\fadeOutUpBig.css" />
+    <Content Include="Public\css\animate.css\source\flippers\flip.css" />
+    <Content Include="Public\css\animate.css\source\flippers\flipInX.css" />
+    <Content Include="Public\css\animate.css\source\flippers\flipInY.css" />
+    <Content Include="Public\css\animate.css\source\flippers\flipOutX.css" />
+    <Content Include="Public\css\animate.css\source\flippers\flipOutY.css" />
+    <Content Include="Public\css\animate.css\source\lightspeed\lightSpeedIn.css" />
+    <Content Include="Public\css\animate.css\source\lightspeed\lightSpeedOut.css" />
+    <Content Include="Public\css\animate.css\source\rotating_entrances\rotateIn.css" />
+    <Content Include="Public\css\animate.css\source\rotating_entrances\rotateInDownLeft.css" />
+    <Content Include="Public\css\animate.css\source\rotating_entrances\rotateInDownRight.css" />
+    <Content Include="Public\css\animate.css\source\rotating_entrances\rotateInUpLeft.css" />
+    <Content Include="Public\css\animate.css\source\rotating_entrances\rotateInUpRight.css" />
+    <Content Include="Public\css\animate.css\source\rotating_exits\rotateOut.css" />
+    <Content Include="Public\css\animate.css\source\rotating_exits\rotateOutDownLeft.css" />
+    <Content Include="Public\css\animate.css\source\rotating_exits\rotateOutDownRight.css" />
+    <Content Include="Public\css\animate.css\source\rotating_exits\rotateOutUpLeft.css" />
+    <Content Include="Public\css\animate.css\source\rotating_exits\rotateOutUpRight.css" />
+    <Content Include="Public\css\animate.css\source\sliding_entrances\slideInDown.css" />
+    <Content Include="Public\css\animate.css\source\sliding_entrances\slideInLeft.css" />
+    <Content Include="Public\css\animate.css\source\sliding_entrances\slideInRight.css" />
+    <Content Include="Public\css\animate.css\source\sliding_entrances\slideInUp.css" />
+    <Content Include="Public\css\animate.css\source\sliding_exits\slideOutDown.css" />
+    <Content Include="Public\css\animate.css\source\sliding_exits\slideOutLeft.css" />
+    <Content Include="Public\css\animate.css\source\sliding_exits\slideOutRight.css" />
+    <Content Include="Public\css\animate.css\source\sliding_exits\slideOutUp.css" />
+    <Content Include="Public\css\animate.css\source\specials\hinge.css" />
+    <Content Include="Public\css\animate.css\source\specials\jackInTheBox.css" />
+    <Content Include="Public\css\animate.css\source\specials\rollIn.css" />
+    <Content Include="Public\css\animate.css\source\specials\rollOut.css" />
+    <Content Include="Public\css\animate.css\source\zooming_entrances\zoomIn.css" />
+    <Content Include="Public\css\animate.css\source\zooming_entrances\zoomInDown.css" />
+    <Content Include="Public\css\animate.css\source\zooming_entrances\zoomInLeft.css" />
+    <Content Include="Public\css\animate.css\source\zooming_entrances\zoomInRight.css" />
+    <Content Include="Public\css\animate.css\source\zooming_entrances\zoomInUp.css" />
+    <Content Include="Public\css\animate.css\source\zooming_exits\zoomOut.css" />
+    <Content Include="Public\css\animate.css\source\zooming_exits\zoomOutDown.css" />
+    <Content Include="Public\css\animate.css\source\zooming_exits\zoomOutLeft.css" />
+    <Content Include="Public\css\animate.css\source\zooming_exits\zoomOutRight.css" />
+    <Content Include="Public\css\animate.css\source\zooming_exits\zoomOutUp.css" />
+    <Content Include="Public\css\animate.css\source\_base.css" />
+    <Content Include="Public\css\style.css" />
+    <Content Include="Public\FileUploader\jquery.fileupload.css" />
+    <Content Include="Public\FileUploader\jquery.fileupload.js" />
+    <Content Include="Public\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Public\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Public\fullcalendar\jquery.min.js" />
+    <Content Include="Public\fullcalendar\moment.min.js" />
+    <Content Include="Public\images\auth_bg.jpg" />
+    <Content Include="Public\images\blog\blog-page-1.jpg" />
+    <Content Include="Public\images\blog\blog-page-2.jpg" />
+    <Content Include="Public\images\blog\blog-page-4.jpg" />
+    <Content Include="Public\images\details_close.png" />
+    <Content Include="Public\images\details_open.png" />
+    <Content Include="Public\images\image-gallery\1.jpg" />
+    <Content Include="Public\images\image-gallery\10.jpg" />
+    <Content Include="Public\images\image-gallery\11.jpg" />
+    <Content Include="Public\images\image-gallery\12.jpg" />
+    <Content Include="Public\images\image-gallery\13.jpg" />
+    <Content Include="Public\images\image-gallery\14.jpg" />
+    <Content Include="Public\images\image-gallery\15.jpg" />
+    <Content Include="Public\images\image-gallery\2.jpg" />
+    <Content Include="Public\images\image-gallery\3.jpg" />
+    <Content Include="Public\images\image-gallery\4.jpg" />
+    <Content Include="Public\images\image-gallery\5.jpg" />
+    <Content Include="Public\images\image-gallery\6.jpg" />
+    <Content Include="Public\images\image-gallery\7.jpg" />
+    <Content Include="Public\images\image-gallery\8.jpg" />
+    <Content Include="Public\images\image-gallery\9.jpg" />
+    <Content Include="Public\images\lg\avatar2.jpg" />
+    <Content Include="Public\images\login.jpg" />
+    <Content Include="Public\images\logo-blak.svg" />
+    <Content Include="Public\images\logo-white.svg" />
+    <Content Include="Public\images\logo.svg" />
+    <Content Include="Public\images\lucidImages\auth_bg.jpg" />
+    <Content Include="Public\images\lucidImages\blog\blog-page-1.jpg" />
+    <Content Include="Public\images\lucidImages\blog\blog-page-2.jpg" />
+    <Content Include="Public\images\lucidImages\blog\blog-page-4.jpg" />
+    <Content Include="Public\images\lucidImages\details_close.png" />
+    <Content Include="Public\images\lucidImages\details_open.png" />
+    <Content Include="Public\images\lucidImages\image-gallery\1.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\10.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\11.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\12.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\13.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\14.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\15.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\2.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\3.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\4.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\5.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\6.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\7.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\8.jpg" />
+    <Content Include="Public\images\lucidImages\image-gallery\9.jpg" />
+    <Content Include="Public\images\lucidImages\lg\avatar2.jpg" />
+    <Content Include="Public\images\lucidImages\mastercard.png" />
+    <Content Include="Public\images\lucidImages\model1.jpg" />
+    <Content Include="Public\images\lucidImages\model2.jpg" />
+    <Content Include="Public\images\lucidImages\model3.jpg" />
+    <Content Include="Public\images\lucidImages\paper-plane.png" />
+    <Content Include="Public\images\lucidImages\paypal.png" />
+    <Content Include="Public\images\lucidImages\plane.png" />
+    <Content Include="Public\images\lucidImages\portfile.png" />
+    <Content Include="Public\images\lucidImages\sm\avatar1.jpg" />
+    <Content Include="Public\images\lucidImages\sm\avatar2.jpg" />
+    <Content Include="Public\images\lucidImages\sm\avatar3.jpg" />
+    <Content Include="Public\images\lucidImages\sm\avatar4.jpg" />
+    <Content Include="Public\images\lucidImages\sm\avatar5.jpg" />
+    <Content Include="Public\images\lucidImages\sm\avatar6.jpg" />
+    <Content Include="Public\images\lucidImages\space-ship.png" />
+    <Content Include="Public\images\lucidImages\user-small.png" />
+    <Content Include="Public\images\lucidImages\visa-card.png" />
+    <Content Include="Public\images\lucidImages\xs\avatar1.jpg" />
+    <Content Include="Public\images\lucidImages\xs\avatar10.jpg" />
+    <Content Include="Public\images\lucidImages\xs\avatar2.jpg" />
+    <Content Include="Public\images\lucidImages\xs\avatar3.jpg" />
+    <Content Include="Public\images\lucidImages\xs\avatar4.jpg" />
+    <Content Include="Public\images\lucidImages\xs\avatar5.jpg" />
+    <Content Include="Public\images\lucidImages\xs\avatar6.jpg" />
+    <Content Include="Public\images\lucidImages\xs\avatar7.jpg" />
+    <Content Include="Public\images\lucidImages\xs\avatar8.jpg" />
+    <Content Include="Public\images\lucidImages\xs\avatar9.jpg" />
+    <Content Include="Public\images\mastercard.png" />
+    <Content Include="Public\images\model1.jpg" />
+    <Content Include="Public\images\model2.jpg" />
+    <Content Include="Public\images\model3.jpg" />
+    <Content Include="Public\images\paper-plane.png" />
+    <Content Include="Public\images\paypal.png" />
+    <Content Include="Public\images\plane.png" />
+    <Content Include="Public\images\portfile.png" />
+    <Content Include="Public\images\profile.png" />
+    <Content Include="Public\images\sm\avatar1.jpg" />
+    <Content Include="Public\images\sm\avatar2.jpg" />
+    <Content Include="Public\images\sm\avatar3.jpg" />
+    <Content Include="Public\images\sm\avatar4.jpg" />
+    <Content Include="Public\images\sm\avatar5.jpg" />
+    <Content Include="Public\images\sm\avatar6.jpg" />
+    <Content Include="Public\images\space-ship.png" />
+    <Content Include="Public\images\user-small.png" />
+    <Content Include="Public\images\visa-card.png" />
+    <Content Include="Public\images\xs\avatar1.jpg" />
+    <Content Include="Public\images\xs\avatar10.jpg" />
+    <Content Include="Public\images\xs\avatar2.jpg" />
+    <Content Include="Public\images\xs\avatar3.jpg" />
+    <Content Include="Public\images\xs\avatar4.jpg" />
+    <Content Include="Public\images\xs\avatar5.jpg" />
+    <Content Include="Public\images\xs\avatar6.jpg" />
+    <Content Include="Public\images\xs\avatar7.jpg" />
+    <Content Include="Public\images\xs\avatar8.jpg" />
+    <Content Include="Public\images\xs\avatar9.jpg" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\.gitignore" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\dist\circle-progress.js" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\dist\circle-progress.min.js" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\docs\examples.js" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\docs\index.html" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\docs\styles.css" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\karma-saucelabs.conf.js" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\karma.conf.js" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\tests\images\circle.png" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\tests\index.html" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\tests\tests.js" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\tests\test_utils.js" />
+    <Content Include="Public\js\magnific-popup.js" />
+    <Content Include="Public\js\myJson.js" />
+    <Content Include="Public\js\main.js" />
+    <Content Include="Public\js\mychart.js" />
+    <Content Include="Public\js\mysparklinecharts.js" />
+    <Content Include="Public\Upload\Profiles\20180829113214blog-1.png" />
+    <Content Include="Public\Upload\Profiles\female.png" />
+    <Content Include="Public\Upload\Profiles\male.png" />
+    <Content Include="Public\Upload\Profiles\ProfileThumbnails\20180829113214blog-1.png" />
+    <Content Include="Public\Upload\Profiles\ProfileThumbnails\female.png" />
+    <Content Include="Public\Upload\Profiles\ProfileThumbnails\male.png" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\Database.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Database.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Database.edmx.diagram">
+      <DependentUpon>Database.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
+    <Content Include="Views\Holidays\Index.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\Employee\Index.cshtml" />
+    <Content Include="Views\Employee\Requests.cshtml" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\bower.json" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\CHANGELOG.md" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\dist\chartist-plugin-tooltip.css.map" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\dist\chartist-plugin-tooltip.min.js.map" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\dist\LICENSE" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\LICENSE" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\package.json" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\README.md" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\src\css\chartist-plugin-tooltip.css.map" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\src\scss\chartist-plugin-tooltip.css.map" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\src\scss\chartist-plugin-tooltip.scss" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\tasks\aliases.yml" />
+    <Content Include="Public\charts\chartist-plugin-tooltip\test\.jshintrc" />
+    <Content Include="Public\charts\chartist.css.map" />
+    <Content Include="Public\charts\chartist.scss" />
+    <Content Include="Public\charts\chartistJs\.bowerrc" />
+    <Content Include="Public\charts\chartistJs\.doclets.yml" />
+    <Content Include="Public\charts\chartistJs\.editorconfig" />
+    <Content Include="Public\charts\chartistJs\.jshintrc" />
+    <Content Include="Public\charts\chartistJs\.nvmrc" />
+    <Content Include="Public\charts\chartistJs\.travis.yml" />
+    <Content Include="Public\charts\chartistJs\bower.json" />
+    <Content Include="Public\charts\chartistJs\CHANGELOG.md" />
+    <Content Include="Public\charts\chartistJs\CODINGSTYLE.md" />
+    <Content Include="Public\charts\chartistJs\CONTRIBUTING.md" />
+    <Content Include="Public\charts\chartistJs\dist\chartist.css.map" />
+    <Content Include="Public\charts\chartistJs\dist\chartist.min.js.map" />
+    <Content Include="Public\charts\chartistJs\dist\scss\chartist.css.map" />
+    <Content Include="Public\charts\chartistJs\dist\scss\chartist.scss" />
+    <Content Include="Public\charts\chartistJs\dist\scss\settings\_chartist-settings.scss" />
+    <Content Include="Public\charts\chartistJs\LICENSE-MIT" />
+    <Content Include="Public\charts\chartistJs\LICENSE-WTFPL" />
+    <Content Include="Public\charts\chartistJs\package.json" />
+    <Content Include="Public\charts\chartistJs\README.md" />
+    <Content Include="Public\charts\chartistJs\site\.buildignore" />
+    <Content Include="Public\charts\chartistJs\site\code-snippets\custom-include.scss" />
+    <Content Include="Public\charts\chartistJs\site\data\pages\examples.yml" />
+    <Content Include="Public\charts\chartistJs\site\data\pages\getting-started.yml" />
+    <Content Include="Public\charts\chartistJs\site\data\pages\index.yml" />
+    <Content Include="Public\charts\chartistJs\site\data\pages\plugins.yml" />
+    <Content Include="Public\charts\chartistJs\site\layouts\content.hbs" />
+    <Content Include="Public\charts\chartistJs\site\layouts\default.hbs" />
+    <Content Include="Public\charts\chartistJs\site\layouts\landing.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\api-side-navigation.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\browser-support-table.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\code-snippet.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\code.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\dox\dox-member.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\dox\dox-module.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\dox\dox-section.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\example-chart.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\heading.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\hint.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\live-example.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\navigation.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\section.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\side-navigation.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\sub-section.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\table.hbs" />
+    <Content Include="Public\charts\chartistJs\site\partials\text.hbs" />
+    <Content Include="Public\charts\chartistJs\site\styles\main.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\modules\_animation.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\modules\_common.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\modules\_font.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\modules\_icon.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\modules\_scale.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\settings\_chartist-docs.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\settings\_font-awesome-variables.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\settings\_foundation.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\_api-doc.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\_base.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\_code-mirror-theme.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\_example-charts.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\_highlight.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\_landing.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\_live-example.scss" />
+    <Content Include="Public\charts\chartistJs\site\styles\_modules.scss" />
+    <Content Include="Public\charts\chartistJs\site\templates\api-documentation.hbs" />
+    <Content Include="Public\charts\chartistJs\site\templates\examples.hbs" />
+    <Content Include="Public\charts\chartistJs\site\templates\getting-started.hbs" />
+    <Content Include="Public\charts\chartistJs\site\templates\index.hbs" />
+    <Content Include="Public\charts\chartistJs\site\templates\plugins.hbs" />
+    <Content Include="Public\charts\chartistJs\src\styles\chartist.css.map" />
+    <Content Include="Public\charts\chartistJs\src\styles\chartist.scss" />
+    <Content Include="Public\charts\chartistJs\src\styles\settings\_chartist-settings.scss" />
+    <Content Include="Public\charts\chartistJs\tasks\aliases.yml" />
+    <Content Include="Public\charts\chartistJs\test\.jshintrc" />
+    <Content Include="Public\charts\style.css.map" />
+    <Content Include="Public\charts\style.scss" />
+    <Content Include="Public\charts\_chartist-settings.scss" />
+    <Content Include="Public\css\animate.css\.editorconfig" />
+    <Content Include="Public\css\animate.css\.prettierignore" />
+    <Content Include="Public\css\animate.css\.travis.yml" />
+    <Content Include="Public\css\animate.css\animate-config.json" />
+    <Content Include="Public\css\animate.css\bower.json" />
+    <Content Include="Public\css\animate.css\LICENSE" />
+    <Content Include="Public\css\animate.css\package-lock.json" />
+    <Content Include="Public\css\animate.css\package.json" />
+    <Content Include="Public\css\animate.css\README.md" />
+    <Content Include="Public\css\style.css.map" />
+    <Content Include="Public\css\style.scss" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\.travis.yml" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\bower.json" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\jsdoc.conf" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\LICENSE" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\package.json" />
+    <Content Include="Public\jquery-circle-progress-1.2.2\README.md" />
+    <Content Include="Views\Departments\Index.cshtml" />
+    <Content Include="Views\Departments\Edit.cshtml" />
+    <Content Include="Views\Employee\Attendance.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Forgot.cshtml" />
+    <Content Include="Views\Login\Register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>63599</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:63599/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

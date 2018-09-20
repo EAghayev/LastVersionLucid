@@ -1,0 +1,167 @@
+﻿@model LucidHR.Models.AttendanceDatas
+@{
+    ViewBag.Title = "Attendance";
+    int count = 0;
+    int dayCount = 0;
+    int empId =0;
+    bool isHoliday;
+    var holidayList = Model.Holidays.ToList();
+
+}
+
+<div class="main-content-items">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="attendance-list">
+                <h4>@DateTime.Now.ToString("MMMM")/@DateTime.Now.Year</h4>
+                <table class="table mr-3">
+                    <thead>
+                        <tr>
+                            <th style="width:155px !important;"><span>Employee</span></th>
+                            @foreach (var item in Model.Dates)
+                            {
+                                isHoliday = false;
+                                string holidayIcon = "";
+                                count++;
+                                if (holidayList.FirstOrDefault(h => h.StartDate.Value.Date <= item.Date && h.EndDate.Value.Date > item.Date) != null)
+                                {
+                                    isHoliday = true;
+                                }
+
+                                if (item.DayOfWeek.ToString() == "Saturday")
+                                {
+                            <th class="weekend1">
+                                @if (isHoliday == true)
+                                {
+                                    <i class="icon-target"></i>
+                                }
+                                @count
+                            </th>
+                                }
+                                else if (item.DayOfWeek.ToString() == "Sunday")
+                                {
+                                    <th class="weekend2">
+                                        @if (isHoliday == true)
+                                        {
+                                            <i class="icon-target"></i>
+                                        }
+                                        @count
+                                    </th>
+                                }
+                                else
+                                {
+                                    <th>
+                                        @if (isHoliday == true)
+                                        {
+                                            <i class="icon-target"></i>
+                                        }
+                                        @count
+                                    </th>
+                                }
+                            }
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.Employees)
+                        {
+                            dayCount = 0;
+                            empId = item.Id;
+
+                        <tr data-id="@item.Id">
+                            <td data-toggle="tooltip" data-placement="top" title="Phone:@item.Phone  Email:@item.Email" class="profile">
+                                <span>@item.Name @item.Surname</span>
+                            </td>
+                            @foreach (var date in Model.Dates)
+                            {
+                                dayCount++;
+                                string empExist = "attn-day";
+                                string checkIcon = "icon-check";
+                                string closeIcon = "icon-close";
+                                string bg = "";
+                                bool isLeave = false;
+                                isHoliday=false;
+                                if (holidayList.FirstOrDefault(h => h.StartDate.Value.Date <= date.Date && h.EndDate.Value.Date > date.Date) != null)
+                                {
+                                    isHoliday = true;
+                                }
+
+                                bool isAtn = false;
+                                if (item.JoinDate > date.Date)
+                                {
+                                    empExist = "";
+                                    closeIcon = "fas fa-minus";
+                                    checkIcon = "fas fa-minus";
+                                }
+                                else
+                                {
+                                    if (Model.Attendances.FirstOrDefault(a => a.EmployeeId == @empId && a.Date.Value.ToShortDateString()== date.Date.ToShortDateString()).Atd==true)
+                                    {
+                                        isAtn = true;
+                                    }
+
+                                    foreach (var leave in Model.LeaveRequests.Where(l => l.EmployeeId == item.Id).ToList())
+                                    {
+                                        if (date.Date >= leave.StratDate.Value.Date && date.Date <leave.FinishDate.Value.Date)
+                                        {
+                                            isLeave = true;
+                                        }
+                                    }
+
+                                }
+
+                                if (date.Date > DateTime.Now)
+                                {
+                                    <td style="background:gray;">
+                                        <i class="icon-check" style="color:dimgray;"></i>
+                                    </td>
+                                }
+                                else if (isHoliday == true)
+                                {
+                                    <td>
+                                        <i class="icon-target" style="color:darkslategrey;font-weight:600;"></i>
+                                    </td>
+                                }
+                                else if (isLeave == true)
+                                {
+                                    <td>
+                                        <i class="icon-paper-plane" style="color:darkslategrey;font-weight:600;"></i>
+                                    </td>
+                                }
+
+                                else
+                                {
+                                    if (date.Date.DayOfWeek.ToString() == "Saturday")
+                                    {
+                                        <td class="weekend1 @empExist" data-day="@date.Date.ToShortDateString()" data-attn="@isAtn" style="@bg">
+                                            <i class="@(isAtn==false?@closeIcon:@checkIcon)"></i>
+                                        </td>
+                                    }
+                                    else if (date.DayOfWeek.ToString() == "Sunday")
+                                    {
+                                        <td class="weekend2 @empExist" data-day="@date.Date.ToShortDateString()" data-attn="@isAtn" style="@bg">
+                                            <i class="@(isAtn==false?@closeIcon:@checkIcon)"></i>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td data-day="@date.Date.ToShortDateString()" data-attn="@isAtn" class="@empExist" style="@bg">
+                                            <i class="@(isAtn==false?@closeIcon:@checkIcon)"></i>
+                                        </td>
+                                    }
+                                }
+                            }
+
+                        </tr>
+                        
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

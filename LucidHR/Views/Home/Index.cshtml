@@ -1,0 +1,322 @@
+﻿@model  LucidHR.Models.ViewHome
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section progressCircleJs{
+    <!--ProgressBar-->
+    <script src="~/Public/jquery-circle-progress-1.2.2/dist/circle-progress.js"></script>
+    <script src="~/Public/jquery-circle-progress-1.2.2/dist/circle-progress.min.js"></script>
+    <script src="~/Public/jquery-circle-progress-1.2.2/docs/examples.js"></script>
+}
+
+@section ChartistJs{
+    <!--Chartist-->
+    <script src="~/Public/charts/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist-plugin-legend/0.6.2/chartist-plugin-legend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+}
+
+<div class="modal ">
+    <div class="modal-overlay animated zoomIn">
+        <div class="to-do-modal">
+            <div class="to-do-modal-header">
+                <h5>Add New</h5>
+            </div>
+       
+            <form method="post" autocomplete="off" id="add-to-do" class="add-form")">
+                <div class="form-content">
+                    <div class="form-group">
+
+                        <input type="text" class="form-control" name="toDoTitle"placeholder="Title" required />
+                    </div>
+                    <div class="form-group" >
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input type="text"  class="datetimepicker-input datetimepicker form-control" data-target="#datetimepicker1" name="toDoDate" placeholder="Datetime" required />
+                            <span class="input-group-addon btn" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <span class="fa fa-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                        
+                <div class="modal-add-buttons">
+                    <button class="btn btn-primary add-to-do-btn">Add</button>
+                    <button class="btn btn-outline-secondary close-modal">Close</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="main-content-items">
+    <div class="row clearfix">
+        <div class="col-lg-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content-counters">
+                        <div class="counter-box">
+                            <div class="counter">
+                                <i class="fas fa-user"></i>
+                                <h6>
+                                    New Employees
+                                    <span>@Model.Employees.Where(e=>e.JoinDate>DateTime.Today.AddMonths(-1)).ToList().Count</span>
+                                </h6>
+                            </div>
+                            <hr>
+                            <div class="counter">
+                                <i class="fas fa-users"></i>
+                                <h6>
+                                    Total Employees
+                                    <span>@Model.Employees.Count</span>
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="counter-box" style="margin-top:30px;">
+                            <div class="counter">
+                                <i class="fas fa-university"></i>
+                                <h6>
+                                    Total Salary
+                                    @{
+                                        int total = 0;
+                                        int empCount;
+                                        var counter = 0;
+                                        foreach (var item in Model.Employees)
+                                        {
+                                            total += Convert.ToInt32(item.Salary);
+                                            counter++;
+                                        }
+                                        empCount = total / counter;
+                                     }
+                                    <span>@total</span>
+                                </h6>
+                            </div>
+                            <hr>
+                            <div class="counter">
+                                <i class="fas fa-university"></i>
+                                <h6>
+                                    Avg. Salary
+                                    <span>@empCount</span>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-md-6">
+                    <div class="income-box text-center">
+                        <div class="income-header text-center mb-3">
+                            <h5>
+                                Income Analysis
+                            </h5>
+                            <span>8% High then last month</span>
+                        </div>
+                        <span id="sparkline-income" class="sparkline">&nbsp;</span>
+                        <ul class="income-reports mt-3">
+                            <li>
+                                <span class="report-header">Design</span>
+                                <b class="report-value">84.60%</b>
+                            </li>
+                            <li>
+                                <span class="report-header">Dev</span>
+                                <b class="report-value">15.40%</b>
+                            </li>
+                            <li>
+                                <span class="report-header">SEO</span>
+                                <b class="report-value">5.10%</b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="mystacked-bar">
+                <div class="mystacked-bar-header">
+                    <span>Salary Statistics </span>
+                    <ul class="mystacked-buttons">
+                        @*<li>
+                            <a href="@Url.Action("salary",new {name="week"})">W</a>
+                            <span>Weekly</span>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("salary",new {name="month"})">M</a>
+                            <span>Monthly</span>
+                        </li>*@
+                        <li>
+                            <a href="@Url.Action("salary",new {name="year"})" class="active">Y</a>
+                            <span>Yearly</span>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="ct-chart ct-perfect-fourth" id="exampleStackedBar"></div>
+
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12">
+            <div class="progress-bars">
+                <h6>Employee Structure</h6>
+                <div class="progress-bar-blocks">
+                    <div class="progress-bar-block">
+                        <span>Male</span>
+                        <div class="progress-circle" id="circle-first" class="circle" data-value="0.9">
+                            <strong style=" color: rgb(73, 169, 229);"></strong>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="progress-bar-block">
+                        <span>Female</span>
+                        <div class="progress-circle" id="circle-second" data-value="0.75">
+                            <strong style="color: rgb(184, 128, 225);"></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-8 col-md-12">
+            <div class="total-salary-chart">
+                <div class="line-chart-header">
+                    <span>Total Salary by Unit </span>
+                    <ul class="line-chart-buttons">
+                        @*<li>
+                            <a href="#">W</a>
+                            <span>Weekly</span>
+                        </li>
+                        <li>
+                            <a href="#">M</a>
+                            <span>Monthly</span>
+                        </li>*@
+                        <li>
+                            <a href="" class="active">Y</a>
+                            <span>Yearly</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ct-chart" id="LineChart"></div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="to-do-box">
+                <div class="to-do-header d-flex justify-content-between align-items-center">
+                    <h6>To Do List</h6>
+                    <div class="add-to-do btn btn-info">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+
+                <ul class="to-do-list">
+                    
+                    @foreach (var item in Model.Todolists.OrderBy(t=>t.Date).Take(4))
+                    {
+                        <li>
+                                <div class="pretty p-svg p-curve to-do-checkbox">
+                                    <input name="list" type="checkbox" value="@item.Id" @(item.IsCompleted == true ? "checked" : "") />
+                                    <div class="state p-warning">
+                                        <!-- svg path -->
+                                        <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                            <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                                  style="stroke: white;fill:white;"></path>
+                                        </svg>
+                                        <label class="@(item.IsCompleted==true?"line-through":"")">@item.Title</label>
+                                    </div>
+                                </div>
+                                <span>SCHEDULED FOR @item.Date.Value.ToString("hh:mm tt dd MMMM yyyy")</span>
+                           
+
+                        </li>
+                    }
+
+                </ul>
+                <div class="pages-btns">
+                    <div class="pages-btns-box">
+                        @{
+                            double pageCount = Model.Todolists.Count / 4.00;
+                            for (int i = 0; i < Math.Ceiling(pageCount); i++)
+                            {
+                                <a href="@Url.Action("pagenation",new {page=i+1})" class="btn btn-info todo-page">@(i + 1)</a>
+                            }
+                        }
+                    </div>
+                    <a href="@Url.Action("deletelist")" class="list-delete"><i class="fas fa-trash"></i></a>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @*<div class="row clearfix">
+        <div class="col-lg-8 col-md-12">
+            <div id="employee-table-section">
+                <div class="employee-header">
+                    Employee Performance
+                </div>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Avatar</th>
+                            <th>Name</th>
+                            <th>Designation</th>
+                            <th>Performance</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="~/Public/images/xs/avatar1.jpg" alt=""></td>
+                            <td>Marshall Nichols</td>
+                            <td>UI UX Designer</td>
+                            <td><span class="mybadge mybadge-success">GOOD</span></td>
+                            <td><span class="sparkline-employee" data-id="1" class="sparkline">&nbsp;</span></td>
+                        </tr>
+                        <tr>
+                            <td><img src="~/Public/images/xs/avatar1.jpg" alt=""></td>
+                            <td>Marshall Nichols</td>
+                            <td>UI UX Designer</td>
+                            <td><span class="mybadge mybadge-primary">Excelent</span></td>
+                            <td><span class="sparkline-employee" data-id="2" class="sparkline">&nbsp;</span></td>
+                        </tr>
+                        <tr>
+                            <td><img src="~/Public/images/xs/avatar1.jpg" alt=""></td>
+                            <td>Marshall Nichols</td>
+                            <td>UI UX Designer</td>
+                            <td><span class="mybadge mybadge-danger">WEAK</span></td>
+                            <td><span class="sparkline-employee" data-id="3" class="sparkline">&nbsp;</span></td>
+                        </tr>
+                        <tr>
+                            <td><img src="~/Public/images/xs/avatar1.jpg" alt=""></td>
+                            <td>Marshall Nichols</td>
+                            <td>UI UX Designer</td>
+                            <td><span class="mybadge mybadge-warning">AVERAGE</span></td>
+                            <td><span class="sparkline-employee" data-id="4" class="sparkline">&nbsp;</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="progress-bars">
+                <h6>Employee Structure</h6>
+                <div class="progress-bar-block">
+                    <span>Male</span>
+                    <div class="progress-circle" id="circle-first" class="circle" data-value="0.9">
+                        <strong style=" color: rgb(73, 169, 229);"></strong>
+                    </div>
+                    <hr>
+                </div>
+                <div class="progress-bar-block">
+                    <span>Female</span>
+                    <div class="progress-circle" id="circle-second" data-value="0.75">
+                        <strong style="color: rgb(184, 128, 225);"></strong>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>*@
+</div>

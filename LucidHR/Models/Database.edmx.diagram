@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7e137d458a894f9a82a1c3fbf51ceed8" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="LucidModel.Client" Width="1.5" PointX="8.75" PointY="4.625" />
+        <EntityTypeShape EntityType="LucidModel.ClientsProject" Width="1.5" PointX="11" PointY="6.625" />
+        <EntityTypeShape EntityType="LucidModel.Expens" Width="1.5" PointX="3" PointY="7.25" />
+        <EntityTypeShape EntityType="LucidModel.Invoice" Width="1.5" PointX="11" PointY="2.875" />
+        <EntityTypeShape EntityType="LucidModel.LeaveType" Width="1.5" PointX="3.75" PointY="4.125" />
+        <EntityTypeShape EntityType="LucidModel.Payment" Width="1.5" PointX="14" PointY="3" />
+        <EntityTypeShape EntityType="LucidModel.PaymentType" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="LucidModel.Project" Width="1.5" PointX="8.75" PointY="7.75" />
+        <AssociationConnector Association="LucidModel.ClientsProjects_fk0" />
+        <AssociationConnector Association="LucidModel.Invoices_fk0" />
+        <AssociationConnector Association="LucidModel.Payments_fk0" />
+        <AssociationConnector Association="LucidModel.ClientsProjects_fk1" />
+        <AssociationConnector Association="LucidModel.Expenses_fk1" />
+        <AssociationConnector Association="LucidModel.Invoices_fk1" />
+        <AssociationConnector Association="LucidModel.Payments_fk1" />
+        <EntityTypeShape EntityType="LucidModel.Department" Width="1.5" PointX="3" PointY="20.5" />
+        <EntityTypeShape EntityType="LucidModel.Role" Width="1.5" PointX="0.75" PointY="6.5" />
+        <EntityTypeShape EntityType="LucidModel.Holiday" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="LucidModel.LeaveRequest" Width="1.5" PointX="6" PointY="9.125" />
+        <AssociationConnector Association="LucidModel.LeaveRequests_fk1" />
+        <EntityTypeShape EntityType="LucidModel.Attendance" Width="1.5" PointX="5.25" PointY="25.625" />
+        <EntityTypeShape EntityType="LucidModel.Employee" Width="1.5" PointX="3" PointY="23.25" />
+        <AssociationConnector Association="LucidModel.Attendance_fk0" />
+        <AssociationConnector Association="LucidModel.FK_Departments_Employees" />
+        <AssociationConnector Association="LucidModel.Employees_fk0" />
+        <AssociationConnector Association="LucidModel.Expenses_fk0" />
+        <AssociationConnector Association="LucidModel.LeaveRequests_fk0" />
+        <EntityTypeShape EntityType="LucidModel.EventType" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="LucidModel.Event" Width="1.5" PointX="7.625" PointY="13.125" />
+        <AssociationConnector Association="LucidModel.FK_Events_EventTypes" />
+        <EntityTypeShape EntityType="LucidModel.User" Width="1.5" PointX="5.25" PointY="22.25" />
+        <AssociationConnector Association="LucidModel.FK_Users_Employees" />
+        <EntityTypeShape EntityType="LucidModel.Todolist" Width="1.5" PointX="7.5" PointY="22.5" />
+        <AssociationConnector Association="LucidModel.FK_Todolist_Users" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

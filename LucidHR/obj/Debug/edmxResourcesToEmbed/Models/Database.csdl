@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="LucidModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="LucidEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Clients" EntityType="LucidModel.Client" />
+    <EntitySet Name="ClientsProjects" EntityType="LucidModel.ClientsProject" />
+    <EntitySet Name="Expenses" EntityType="LucidModel.Expens" />
+    <EntitySet Name="Invoices" EntityType="LucidModel.Invoice" />
+    <EntitySet Name="LeaveTypes" EntityType="LucidModel.LeaveType" />
+    <EntitySet Name="Payments" EntityType="LucidModel.Payment" />
+    <EntitySet Name="PaymentTypes" EntityType="LucidModel.PaymentType" />
+    <EntitySet Name="Projects" EntityType="LucidModel.Project" />
+    <AssociationSet Name="ClientsProjects_fk0" Association="LucidModel.ClientsProjects_fk0">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="ClientsProject" EntitySet="ClientsProjects" />
+    </AssociationSet>
+    <AssociationSet Name="Invoices_fk0" Association="LucidModel.Invoices_fk0">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="Payments_fk0" Association="LucidModel.Payments_fk0">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <AssociationSet Name="ClientsProjects_fk1" Association="LucidModel.ClientsProjects_fk1">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ClientsProject" EntitySet="ClientsProjects" />
+    </AssociationSet>
+    <AssociationSet Name="Expenses_fk1" Association="LucidModel.Expenses_fk1">
+      <End Role="PaymentType" EntitySet="PaymentTypes" />
+      <End Role="Expens" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="Invoices_fk1" Association="LucidModel.Invoices_fk1">
+      <End Role="PaymentType" EntitySet="PaymentTypes" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="Payments_fk1" Association="LucidModel.Payments_fk1">
+      <End Role="PaymentType" EntitySet="PaymentTypes" />
+      <End Role="Payment" EntitySet="Payments" />
+    </AssociationSet>
+    <EntitySet Name="Departments" EntityType="LucidModel.Department" />
+    <EntitySet Name="Roles" EntityType="LucidModel.Role" />
+    <EntitySet Name="Holidays" EntityType="LucidModel.Holiday" />
+    <EntitySet Name="LeaveRequests" EntityType="LucidModel.LeaveRequest" />
+    <AssociationSet Name="LeaveRequests_fk1" Association="LucidModel.LeaveRequests_fk1">
+      <End Role="LeaveType" EntitySet="LeaveTypes" />
+      <End Role="LeaveRequest" EntitySet="LeaveRequests" />
+    </AssociationSet>
+    <EntitySet Name="Attendances" EntityType="LucidModel.Attendance" />
+    <EntitySet Name="Employees" EntityType="LucidModel.Employee" />
+    <AssociationSet Name="Attendance_fk0" Association="LucidModel.Attendance_fk0">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Attendance" EntitySet="Attendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Departments_Employees" Association="LucidModel.FK_Departments_Employees">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <AssociationSet Name="Employees_fk0" Association="LucidModel.Employees_fk0">
+      <End Role="Role" EntitySet="Roles" />
+      <End Role="Employee" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="Expenses_fk0" Association="LucidModel.Expenses_fk0">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Expens" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="LeaveRequests_fk0" Association="LucidModel.LeaveRequests_fk0">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="LeaveRequest" EntitySet="LeaveRequests" />
+    </AssociationSet>
+    <EntitySet Name="EventTypes" EntityType="LucidModel.EventType" />
+    <EntitySet Name="Events" EntityType="LucidModel.Event" />
+    <AssociationSet Name="FK_Events_EventTypes" Association="LucidModel.FK_Events_EventTypes">
+      <End Role="EventType" EntitySet="EventTypes" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <EntitySet Name="Users" EntityType="LucidModel.User" />
+    <AssociationSet Name="FK_Users_Employees" Association="LucidModel.FK_Users_Employees">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="Todolists" EntityType="LucidModel.Todolist" />
+    <AssociationSet Name="FK_Todolist_Users" Association="LucidModel.FK_Todolist_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Todolist" EntitySet="Todolists" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientsProjects" Relationship="LucidModel.ClientsProjects_fk0" FromRole="Client" ToRole="ClientsProject" />
+    <NavigationProperty Name="Invoices" Relationship="LucidModel.Invoices_fk0" FromRole="Client" ToRole="Invoice" />
+    <NavigationProperty Name="Payments" Relationship="LucidModel.Payments_fk0" FromRole="Client" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="ClientsProject">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="LucidModel.ClientsProjects_fk0" FromRole="ClientsProject" ToRole="Client" />
+    <NavigationProperty Name="Project" Relationship="LucidModel.ClientsProjects_fk1" FromRole="ClientsProject" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="Expens">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Item" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Count" Type="Int32" Nullable="false" />
+    <Property Name="OrderBy" Type="Int32" Nullable="false" />
+    <Property Name="From" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <Property Name="PaymentsTypeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PaymentType" Relationship="LucidModel.Expenses_fk1" FromRole="Expens" ToRole="PaymentType" />
+    <NavigationProperty Name="Employee" Relationship="LucidModel.Expenses_fk0" FromRole="Expens" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Number" Type="Int32" Nullable="false" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PaymentTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="Boolean" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="Client" Relationship="LucidModel.Invoices_fk0" FromRole="Invoice" ToRole="Client" />
+    <NavigationProperty Name="PaymentType" Relationship="LucidModel.Invoices_fk1" FromRole="Invoice" ToRole="PaymentType" />
+  </EntityType>
+  <EntityType Name="LeaveType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LeaveRequests" Relationship="LucidModel.LeaveRequests_fk1" FromRole="LeaveType" ToRole="LeaveRequest" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClientId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+    <Property Name="PaymentTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+    <NavigationProperty Name="Client" Relationship="LucidModel.Payments_fk0" FromRole="Payment" ToRole="Client" />
+    <NavigationProperty Name="PaymentType" Relationship="LucidModel.Payments_fk1" FromRole="Payment" ToRole="PaymentType" />
+  </EntityType>
+  <EntityType Name="PaymentType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Profile" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Expenses" Relationship="LucidModel.Expenses_fk1" FromRole="PaymentType" ToRole="Expens" />
+    <NavigationProperty Name="Invoices" Relationship="LucidModel.Invoices_fk1" FromRole="PaymentType" ToRole="Invoice" />
+    <NavigationProperty Name="Payments" Relationship="LucidModel.Payments_fk1" FromRole="PaymentType" ToRole="Payment" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientsProjects" Relationship="LucidModel.ClientsProjects_fk1" FromRole="Project" ToRole="ClientsProject" />
+  </EntityType>
+  <Association Name="ClientsProjects_fk0">
+    <End Type="LucidModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="LucidModel.ClientsProject" Role="ClientsProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientsProject">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Invoices_fk0">
+    <End Type="LucidModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="LucidModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Payments_fk0">
+    <End Type="LucidModel.Client" Role="Client" Multiplicity="1" />
+    <End Type="LucidModel.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="ClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClientsProjects_fk1">
+    <End Type="LucidModel.Project" Role="Project" Multiplicity="1" />
+    <End Type="LucidModel.ClientsProject" Role="ClientsProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ClientsProject">
+        <PropertyRef Name="ProjectId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Expenses_fk1">
+    <End Type="LucidModel.PaymentType" Role="PaymentType" Multiplicity="1" />
+    <End Type="LucidModel.Expens" Role="Expens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expens">
+        <PropertyRef Name="PaymentsTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Invoices_fk1">
+    <End Type="LucidModel.PaymentType" Role="PaymentType" Multiplicity="1" />
+    <End Type="LucidModel.Invoice" Role="Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="PaymentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Payments_fk1">
+    <End Type="LucidModel.PaymentType" Role="PaymentType" Multiplicity="1" />
+    <End Type="LucidModel.Payment" Role="Payment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Payment">
+        <PropertyRef Name="PaymentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Head" Type="Int32" />
+    <NavigationProperty Name="Employee" Relationship="LucidModel.FK_Departments_Employees" FromRole="Department" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Desc" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsHead" Type="Boolean" />
+    <NavigationProperty Name="Employees" Relationship="LucidModel.Employees_fk0" FromRole="Role" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Holiday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="LeaveRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" />
+    <Property Name="Reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="LeaveTypeId" Type="Int32" />
+    <Property Name="StratDate" Type="DateTime" Precision="3" />
+    <Property Name="FinishDate" Type="DateTime" Precision="3" />
+    <Property Name="IsAccepted" Type="Boolean" />
+    <NavigationProperty Name="LeaveType" Relationship="LucidModel.LeaveRequests_fk1" FromRole="LeaveRequest" ToRole="LeaveType" />
+    <NavigationProperty Name="Employee" Relationship="LucidModel.LeaveRequests_fk0" FromRole="LeaveRequest" ToRole="Employee" />
+  </EntityType>
+  <Association Name="LeaveRequests_fk1">
+    <End Type="LucidModel.LeaveType" Role="LeaveType" Multiplicity="0..1" />
+    <End Type="LucidModel.LeaveRequest" Role="LeaveRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LeaveType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaveRequest">
+        <PropertyRef Name="LeaveTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Attendance">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Atd" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Employee" Relationship="LucidModel.Attendance_fk0" FromRole="Attendance" ToRole="Employee" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Phone" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="JoinDate" Type="DateTime" Precision="0" />
+    <Property Name="RoleId" Type="Int32" />
+    <Property Name="Gender" Type="Boolean" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Facebook" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Twitter" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Linkedin" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="HRA" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Bonus" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Conveyance" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="OtherAllowances" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="TDS" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ESI" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ProvidentFund" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="BankLoan" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="therDeductions" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Profile" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Instagram" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Attendances" Relationship="LucidModel.Attendance_fk0" FromRole="Employee" ToRole="Attendance" />
+    <NavigationProperty Name="Departments" Relationship="LucidModel.FK_Departments_Employees" FromRole="Employee" ToRole="Department" />
+    <NavigationProperty Name="Role" Relationship="LucidModel.Employees_fk0" FromRole="Employee" ToRole="Role" />
+    <NavigationProperty Name="Expenses" Relationship="LucidModel.Expenses_fk0" FromRole="Employee" ToRole="Expens" />
+    <NavigationProperty Name="LeaveRequests" Relationship="LucidModel.LeaveRequests_fk0" FromRole="Employee" ToRole="LeaveRequest" />
+    <NavigationProperty Name="Users" Relationship="LucidModel.FK_Users_Employees" FromRole="Employee" ToRole="User" />
+  </EntityType>
+  <Association Name="Attendance_fk0">
+    <End Type="LucidModel.Employee" Role="Employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LucidModel.Attendance" Role="Attendance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attendance">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Departments_Employees">
+    <End Type="LucidModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="LucidModel.Department" Role="Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="Head" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Employees_fk0">
+    <End Type="LucidModel.Role" Role="Role" Multiplicity="0..1" />
+    <End Type="LucidModel.Employee" Role="Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Employee">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Expenses_fk0">
+    <End Type="LucidModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="LucidModel.Expens" Role="Expens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Expens">
+        <PropertyRef Name="OrderBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="LeaveRequests_fk0">
+    <End Type="LucidModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="LucidModel.LeaveRequest" Role="LeaveRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LeaveRequest">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EventType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Events" Relationship="LucidModel.FK_Events_EventTypes" FromRole="EventType" ToRole="Event" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lacation" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Precision="0" />
+    <Property Name="StartTime" Type="DateTime" Precision="3" />
+    <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TypeId" Type="Int32" />
+    <NavigationProperty Name="EventType" Relationship="LucidModel.FK_Events_EventTypes" FromRole="Event" ToRole="EventType" />
+  </EntityType>
+  <Association Name="FK_Events_EventTypes">
+    <End Type="LucidModel.EventType" Role="EventType" Multiplicity="0..1" />
+    <End Type="LucidModel.Event" Role="Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeId" Type="Int32" />
+    <Property Name="UserRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Token" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="IsConfirm" Type="Boolean" />
+    <NavigationProperty Name="Employee" Relationship="LucidModel.FK_Users_Employees" FromRole="User" ToRole="Employee" />
+    <NavigationProperty Name="Todolists" Relationship="LucidModel.FK_Todolist_Users" FromRole="User" ToRole="Todolist" />
+  </EntityType>
+  <Association Name="FK_Users_Employees">
+    <End Type="LucidModel.Employee" Role="Employee" Multiplicity="0..1" />
+    <End Type="LucidModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Todolist">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="LucidModel.FK_Todolist_Users" FromRole="Todolist" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Todolist_Users">
+    <End Type="LucidModel.User" Role="User" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="LucidModel.Todolist" Role="Todolist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Todolist">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

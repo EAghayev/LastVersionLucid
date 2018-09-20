@@ -1,0 +1,152 @@
+﻿@model LucidHR.Models.ViewHome
+@{
+    ViewBag.Title = "Events";
+}
+
+@section eventModal
+{
+    <div class="modal ">
+        <div class="modal-overlay animated animated jello">
+            <div class="event-modal animated">
+                <div class="modal-header">
+                    <h3>Add Event</h3>
+                </div>
+                <form method="post" autocomplete="off" action="@Url.Action("Create")" id="event-add-form">
+                    <div class="form-group form-content">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="StartDate" class="form-control" placeholder="Event Start Date" data-provide="datepicker">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="EndDate" class="form-control" placeholder="Event End Date" data-provide="datepicker">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="StartTime" class="form-control" placeholder="Event Start Time" data-provide="timepicker">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="EndTime" class="form-control" placeholder="Event End Time" data-provide="timepicker">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <input type="text" name="Title" class="form-control" placeholder="Event Title">
+                                </div>
+                                <div class="col-md-4">
+                                    <select name="TypeId" class="form-control">
+                                        @foreach (var item in Model.EventTypes)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="Desc" cols="30" rows="5" class="form-control" placeholder="Event Descriptio ..."></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-add-buttons">
+                        <button class="btn btn-primary" type="submit">Add</button>
+                        <button class="btn btn-outline-secondary close-modal">Close</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+}
+@* @section fullcalendarScripts{
+        <!--FullCalendar-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale-all.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+    }
+    @section fullcalendarStyles{
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css">
+        <link rel="stylesheet" href="~/Public/css/animate.css/animate.min.css">
+    } *@
+
+
+@if (Session["errorEventDelete"] != null)
+{
+    <div id="toast-container" class="toast-top-right">
+        <div class="toast toast-error" aria-live="assertive">
+            <div class="toast-message">@Session["errorEventDelete"]</div>
+        </div>
+    </div>
+    Session["errorEventDelete"] = null;
+}
+@if (Session["deleteEvent"] != null)
+{
+    <div id="toast-container" class="toast-top-right">
+        <div class="toast toast-success" aria-live="assertive">
+            <div class="toast-message">@Session["deleteEvent"]</div>
+        </div>
+    </div>
+    Session["deleteEvent"] = null;
+}
+<div class="events-content">
+    <div class="row">
+        <div class="col-lg-8 col-md-12">
+            <div id='calendar'></div>
+        </div>
+        <div class="col-lg-4">
+            <div class="add-event">
+                <button class="btn btn-primary" id="add-new-event">Add New Event</button>
+            </div>
+
+            <div class="events">
+                <ul class="events-list">
+                    @foreach (var item in Model.Events.Take(4))
+                    {
+                    <li class="align-items-center justify-content-between">
+                        <div class="date">
+                            <span class="day">@item.StartDate.Value.Day</span>
+                            <span class="month">@item.StartDate.Value.ToString("MMM")</span>
+                            <span class="year">@item.StartDate.Value.Year</span>
+                        </div>
+                        <div class="event-content">
+                            <h4>@item.Title</h4>
+                            <p>@item.Desc</p>
+                            @if (item.Lacation != null)
+                            {
+                                <small>
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    @item.Lacation
+                                </small>
+                            }
+
+                        </div>
+                        <button  class="event-delete mr-3 btn btn-outline-danger" data-link="@Url.Action("delete",new { id=item.Id})"><i class="far fa-trash-alt"></i></button>
+    
+                    </li>
+                    }
+
+                </ul>
+                <hr />
+                <div class="pages-btns mt-1 ml-3 pb-3">
+                    <div class="pages-btns-box">
+                        @{
+                            double pageCount = ViewBag.EventCount / 4.00;
+                            for (int i = 0; i < Math.Ceiling(pageCount); i++)
+                            {
+                                <a href="@Url.Action("index",new {page=i+1})" class="btn btn-info event-page">@(i + 1)</a>
+                            }
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

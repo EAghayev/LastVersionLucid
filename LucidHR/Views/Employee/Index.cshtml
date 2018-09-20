@@ -1,0 +1,253 @@
+﻿@model LucidHR.Models.ViewHome
+@{
+    ViewBag.Title = "Index";
+}
+
+@section employeeModal{
+    <div class="modal ">
+        <div class="modal-overlay animated zoomIn">
+            <div class="employee-modal ">
+                <div class="employee-modal-header">
+                    <h5>Add New</h5>
+                </div>
+                @*<form action="@Url.Action("upload")" class="dropzone" id="profile-upload" method="post">
+            <div class="dz-message" data-dz-message><span> + Add profile photo</span></div>
+
+        </form>*@
+                <form class="add-uploaded" name="upload" method="post">
+
+                    <div class="form-group form-content d-flex justify-content-start align-items-center mb-0" >
+                        <label for="upload" id="upload-lbl" class="mb-0">
+                            <i class="fas fa-plus"></i>
+                            Add photo
+                        </label>
+                        <input type="file" id="upload" maxlength="100" />
+                        <div class="uploaded-img">
+                            <div class="img">
+                                <a class="image-popup-no-margins uploaded-img-link" href="">
+                                </a>
+                                    
+
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                </form>
+                <form method="post" autocomplete="off" id="add-emp" class="add-form">
+                    <div class="form-group form-content">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="FullName" class="form-control" placeholder="Name and Surname" maxlength="100" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="Email" class="form-control" placeholder="Email"  required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="Phone" class="form-control" placeholder="Phone Number" required>
+                                </div>
+                                <div class="col-md-6 d-flex">
+                                    <div class="form-control d-flex justify-content-end">
+                                        <span class="gender-text">Gender</span>
+                                        <div class="gender">
+                                            <i class="fas fa-male"></i>
+                                            <input type="radio" name="Gender" value="0" class="form-control" required/>
+                                        </div>
+                                        <div class="gender">
+                                            <i class="fas fa-female"></i>
+                                            <input type="radio" name="Gender" value="1" class="form-control" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    @* <input type="text" name="Department" class="form-control" placeholder="Department">*@
+
+                                    <select class="form-control" name="DepartmentId" style="color:#495057;" required>
+                                        <option value="0">Department</option>
+                                        @foreach (var item in Model.Departments)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <select class="form-control" name="RoleId" style="color:#495057;" required>
+                                        <option value="0">Role</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="JoinDate" data-provide="datepicker" class="form-control" placeholder="Joid Date" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control" name="Salary" type="number" placeholder="Salary" required />
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                    <input type="file" class="" id="InputFile" name="Profile">
+                </div>*@
+                        <hr>
+                        <h6>Socials</h6>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="Facebook" class="form-control" placeholder="Facebook">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="Twitter" class="form-control" placeholder="Twitter">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="Linkedin" class="form-control" placeholder="Linkedin">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="Instagram" class="form-control" placeholder="Instagram">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-add-buttons">
+                        <button class="btn btn-primary add-emp-btn" type="submit">Add</button>
+                        <button class="btn btn-primary edit-emp-btn" data-id="0" type="submit">Edit</button>
+                        <button class="btn btn-outline-secondary close-modal">Close</button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+}
+@section dataTablesStyle{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/basic.css" rel="stylesheet" />
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" rel="stylesheet" />*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+}
+@section dataTablesJs{
+    <!--boorstarp dataTable-->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="~/Public/js/magnific-popup.js"></script>
+    <script>
+        //new Dropzone("#profile-upload", {
+        //    maxFiles: 1,
+        //    addRemoveLinks: true,
+        //})
+        
+    </script>
+
+}
+<div class="main-content-items">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="employee-list">
+                <div class="list-header">
+                    <h6>Employee List</h6>
+                    <button class="btn btn-info" id="modal-add-new">Add New</button>
+                </div>
+                <div class="table-responsive">
+
+                    <table class="table table-striped" id="data-table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>
+                                    <div class="pretty p-svg p-curve">
+                                        <input type="checkbox" id="employee-checkbox-all" />
+                                        <div class="state p-warning">
+                                            <!-- svg path -->
+                                            <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                                <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                                      style="stroke: white;fill:white;"></path>
+                                            </svg>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </th>
+                                <th>Name</th>
+                                <th>Employe ID</th>
+                                <th>Phone</th>
+                                <th>Join Date</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="emp-tbody">
+                            @foreach (var item in Model.Employees)
+                            {
+                                <tr id="@item.Id">
+                                    <td name="profile">
+                                        <div class="pretty p-svg p-curve">
+                                            <input type="checkbox" value="@item.Id" name="emp-checkbox" />
+                                            <div class="state p-warning">
+                                                <!-- svg path -->
+                                                <svg class="svg svg-icon" viewBox="0 0 20 20">
+                                                    <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
+                                                          style="stroke: white;fill:white;"></path>
+                                                </svg>
+                                                <label></label>
+                                            </div>
+                                        </div>
+                                        <div class="profile-img">
+                                            <img src="~/Public/Upload/Profiles/ProfileThumbnails/@item.Profile" alt="">
+                                        </div>
+                                    </td>
+                                    <td name="name-email">
+                                        <h6>@item.Name @item.Surname</h6>
+                                        <span>@item.Email</span>
+                                    </td>
+                                    <td name="emp-id">
+                                        @{ 
+                                            string empId = "LA-" + item.Id;
+                                        }
+                                        <span>@empId</span>
+                                    </td>
+                                    <td name="phone">
+                                        <span>
+                                            @* @item.Phone.Substring(0, 3)- @item.Phone.Substring(3, 3)- @item.Phone.Substring(6, 2)- @item.Phone.Substring(8, item.Phone.Length - 8)*@
+                                            @item.Phone
+                                        </span>
+                                    </td>
+                                    <td name="date">
+                                        <span>@item.JoinDate.Value.ToString("MMMM dd, yyyy")</span>
+                                    </td>
+                                    <td name="role">
+                                        <span>@item.Role.Name</span>
+                                    </td>
+                                    <td name="btns">
+                                        <a href="@Url.Action("edit","employee",new { id = item.Id })"  class="emp-edit"><i class="far fa-edit"></i></a>
+                                        <a href=" @Url.Action("delete","employee",new { id = item.Id }) " class="emp-delete"><i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

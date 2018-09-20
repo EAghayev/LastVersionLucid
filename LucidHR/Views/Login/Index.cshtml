@@ -1,0 +1,80 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Public/css/style.css">
+</head>
+<body>
+    <div class="main">
+        @if (Session["loginError"] != null)
+        {
+            <div id="toast-container" class="toast-top-right">
+                <div class="toast toast-error" aria-live="assertive">
+                    <div class="toast-message">@Session["loginError"]</div>
+                </div>
+            </div>
+            Session["loginError"] = null;
+        }
+        @if (Session["SendForgot"] != null)
+        {
+            <div id="toast-container" class="toast-top-right">
+                <div class="toast toast-success" aria-live="assertive">
+                    <div class="toast-message">@Session["SendForgot"]</div>
+                </div>
+            </div>
+            Session["SendForgot"] = null;
+
+        }
+        @if (Session["resetPassword"] != null)
+        {
+            <div id="toast-container" class="toast-top-right">
+                <div class="toast toast-success" aria-live="assertive">
+                    <div class="toast-message">@Session["resetPassword  "]</div>
+                </div>
+            </div>
+            Session["resetPassword"] = null;
+
+        }
+        
+        <div class="login-content">
+            <div class="form">
+                <div class="logo"><img src="~/Public/images/logo-white.svg" alt="Lucid"></div>
+                <div class="login-form">
+                    <h5 class="form-header">Login to your account</h5>
+                    <form action="@Url.Action("login")" method="post" autocomplete="on">
+                        <div class="form-content">
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn log-btn">LOGIN</button>
+                    </form>
+                    <div class="forgot account">
+                        <i class="fas fa-lock"></i><a href="@Url.Action("forgot")">Forgot password?</a>
+                    </div>
+                    <div class="register account">
+                        <span>Don't have an account?</span><a href="@Url.Action("register")">Register</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="~/Public/js/main.js"></script>
+</body>
+</html>

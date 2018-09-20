@@ -1,0 +1,169 @@
+﻿@model LucidHR.Models.ViewHome
+@{
+    ViewBag.Title = "Request";
+    DateTime moment = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day, 20, 00, 00);
+    var list = Model.LeaveRequests.ToList();
+}
+@section dataTablesStyle{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+}
+@section dataTablesJs{
+    <!--boorstarp dataTable-->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+}
+@section requestModal{
+
+   
+
+    <div class="modal">
+        <div class="modal-overlay animated animated bounceInRight">
+            <div class="request-modal animated">
+                <div class="request-modal-header">
+                    <h5>Add Leave</h5>
+                </div>
+                <form method="post" action="@Url.Action("addleave")" id="leave-form" autocomplete="off">
+                    
+                    <div class="form-group form-content">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="EmployeeId" placeholder="*EmployeeId" required/>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" list="leave-types" class="form-control" name="LeaveTypeId" placeholder="*Leave Type" required/>
+                            <datalist id="leave-types">
+                                @foreach (var item in Model.LeaveTypes)
+                                {
+                                    <option data-value="@item.Id">@item.Name</option>
+                                }
+                            </datalist>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="text" name="StartDate" data-provide="datepicker" class="form-control" placeholder="*From" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="FinishDate" data-provide="datepicker" class="form-control" placeholder="*To" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="Reason" rows="4" class="form-control" placeholder="*Leave Reason" required></textarea>
+                        </div>
+                
+
+
+                    </div>
+                    <div class="modal-add-buttons">
+                        <button class="btn btn-primary add-request" type="submit">Add</button>
+                        <button class="btn btn-outline-secondary close-modal">Close</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+}
+    <div class="main-content-items">
+        @if (Session["RequestError"] != null)
+        {
+            <div id="toast-container" class="toast-top-right">
+                <div class="toast toast-error" aria-live="assertive">
+                    <div class="toast-message">@Session["RequestError"]</div>
+                </div>
+            </div>
+            Session["RequestError"] = null;
+        }
+        @if (Session["RequestAdded"] != null)
+        {
+            <div id="toast-container" class="toast-top-right">
+                <div class="toast toast-success" aria-live="assertive">
+                    <div class="toast-message">@Session["RequestAdded"]</div>
+                </div>
+            </div>
+            Session["RequestAdded"] = null;
+
+        }
+        <div class="row">
+            <div class="col-md-12">
+                <div id="employee-list">
+                    <div class="list-header">
+                        <h6>Employee List</h6>
+                        <button class="btn btn-info" id="modal-add-leave">Add New</button>
+                    </div>
+                    <table class="table table-striped table-bordered" id="data-table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th style="width:28px;">
+
+                                </th>
+                                <th>Name</th>
+                                <th>Employe ID</th>
+                                <th>Leave Type</th>
+                                <th>Date</th>
+                                <th>Reason</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in list.Where(l=>l.FinishDate.Value.Date>=moment.Date).ToList())
+                            {
+                                <tr>
+                                    <td>
+
+                                        <div class="profile-img">
+                                            <img src="~/Public/Upload/Profiles/ProfileThumbnails/@item.Employee.Profile" alt="@item.Employee.Name @item.Employee.Surname">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <h6>@item.Employee.Name @item.Employee.Surname</h6>
+                                    </td>
+                                    <td>
+                                        @{
+                                            string empId = "LA-" + item.EmployeeId;
+                                        }
+                                        <span>@empId</span>
+                                    </td>
+                                    <td>
+                                        <span>@item.LeaveType.Name Leave</span>
+                                    </td>
+                                    <td>
+                                        @if ((item.FinishDate - item.StratDate).Value.Days <= 1)
+                                        {
+
+                                            <span>@item.StratDate.Value.ToString("dd MMM,yyyy")</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@item.StratDate.Value.ToString("dd MMM,yyyy") to @item.FinishDate.Value.ToString("dd MMM,yyyy") <span class="day-count">@((item.FinishDate - item.StratDate).Value.Days)</span> </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <span>@item.Reason</span>
+                                    </td>
+                                    <td>
+                                        @if (item.IsAccepted == true)
+                                        {
+                                            <div class="btn btn-success">Accepted</div>
+                                            <a href="@Url.Action("reject",new { id=item.Id})" class="request-reject"><i class="far fa-trash-alt"></i></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("accept",new {id=item.Id })" class="request-accept"><i class="fas fa-check"></i></a>
+                                            <a href="@Url.Action("reject",new { id=item.Id})" class="request-reject"><i class="fas fa-ban"></i></a>
+                                        }
+
+                                    </td>
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>

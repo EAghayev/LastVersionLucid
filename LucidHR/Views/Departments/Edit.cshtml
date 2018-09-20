@@ -1,0 +1,82 @@
+﻿@model LucidHR.Models.SelectedDepartment
+@{
+    ViewBag.Title = "Edit";
+}
+@section dataTablesStyle{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+}
+@section dataTablesJs{
+    <!--boorstarp dataTable-->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+}
+<div class="main-content-items">
+
+
+    @if (Session["DepEditError"] != null)
+    {
+        <div id="toast-container" class="toast-top-right">
+            <div class="toast toast-error" aria-live="assertive">
+                <div class="toast-message">@Session["DepEditError"]</div>
+            </div>
+        </div>
+
+        Session["DepEditError"] = null;
+    }
+    @if (Session["DepEditSuccess"] != null)
+    {
+        <div id="toast-container" class="toast-top-right">
+            <div class="toast toast-success" aria-live="assertive">
+                <div class="toast-message">@Session["DepEditSuccess"]</div>
+            </div>
+        </div>
+
+        Session["DepEditSuccess"] = null;
+    }
+
+    <form method="post" autocomplete="off" action="@Url.Action("edit",new {id=Model.Dep.Id})" class="edit-dep-form">
+        <div class="form-group form-content">
+            <div class="form-group  mr-1">
+                <input type="text" name="Name" value="@Model.Dep.Name" class="form-control" placeholder="Department Name">
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="role-inputs pr-1">
+                            @foreach (var item in Model.DepRoles)
+                            {
+                                if (item.IsHead == true)
+                                {
+                                    continue;
+                                }
+                                <div class="role-input-box animated">
+                                    <input type="number" name="RoleId" value="@item.Id" hidden />
+                                    <input type="text" name="Role" data-RoleId="@item.Id" value="@item.Name" class="form-control mb-3" placeholder="Role">
+                                    <a href="@Url.Action("roleremove",new {id=item.Id })" class="delete-role-input">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                </div>
+
+
+                            }
+                        </div>
+                        <div class="add-input">
+                            <span class="add-input-btn">
+                                <i class="fas fa-plus"></i>
+
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-add-buttons">
+            <button class="btn btn-primary" type="submit">Edit</button>
+            <a href="@Url.Action("index")" class="btn btn-outline-secondary ml-1">Back</a>
+        </div>
+
+    </form>
+</div>

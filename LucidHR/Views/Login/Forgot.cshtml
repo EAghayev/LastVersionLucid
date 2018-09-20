@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Public/css/style.css">
+</head>
+<body>
+    <div class="main">
+        @if (Session["forgotError"] != null)
+        {
+            <div id="toast-container" class="toast-top-right">
+                <div class="toast toast-error" aria-live="assertive">
+                    <div class="toast-message">@Session["forgotError"]</div>
+                </div>
+            </div>
+            Session["forgotError"] = null;
+        }
+       @if (Session["confirmForgot"] != null)
+        {
+            <div class="login-content">
+                <div class="form">
+                    <div class="logo"><img src="~/Public/images/logo-white.svg" alt="Lucid"></div>
+                    <div class="login-form">
+                        <h5 class="form-header">Login to your account</h5>
+                        <form action="@Url.Action("reset")" method="post" autocomplete="off">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="Password" placeholder="Password" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn log-btn">CHANGE</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            Session["confirmForgot"] = null;
+        }
+        else
+        {
+            <div class="login-content">
+                <div class="form">
+                    <div class="logo"><img src="~/Public/images/logo-white.svg" alt="Lucid"></div>
+                    <div class="login-form">
+                        <h5 class="form-header">Login to your account</h5>
+                        <form action="@Url.Action("forgot")" method="post" autocomplete="off">
+                            <div class="form-content">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="Email" placeholder="Email" required>
+                                </div>
+
+                            </div>
+                            <button type="submit" class="btn log-btn">SEND RESET MAIL</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        }
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="~/Public/js/main.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,112 @@
+﻿@model LucidHR.Models.ViewHome
+@{
+    ViewBag.Title = "Index";
+    int count = 0;
+}
+@section holidayModal{
+    <div class="modal">
+        <div class="modal-overlay animated bounceIn">
+            <div class="department-modal">
+                <div class="department-modal-header">
+                    <h5>Add New</h5>
+                </div>
+                <form method="post" autocomplete="off" action="@Url.Action("create")" class="holiday-form">
+                    <div class="form-group form-content">
+                        <div class="form-group">
+                            <input type="text" name="Name" class="form-control" placeholder="Holiday Name" />
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="StartDate" class="form-control" placeholder="StartDate" data-provide="datepicker" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" name="EndDate" class="form-control" placeholder="EndDate" data-provide="datepicker" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-add-buttons">
+                        <button class="btn btn-primary add-hol-btn" type="submit">Add</button>
+                        <button class="btn btn-primary edit-hol-btn" type="submit">Edit</button>
+                        <button class="btn btn-outline-secondary close-modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+@if (Session["inputError"] != null)
+{
+    <div id="toast-container" class="toast-top-right">
+        <div class="toast toast-error" aria-live="assertive">
+            <div class="toast-message">@Session["inputError"]</div>
+        </div>
+    </div>
+    Session["inputError"] = null;
+}
+@if (Session["holidayAdd"] != null)
+{
+    <div id="toast-container" class="toast-top-right">
+        <div class="toast toast-success" aria-live="assertive">
+            <div class="toast-message">@Session["holidayAdd"]</div>
+        </div>
+    </div>
+    Session["holidayAdd"] = null;
+}
+<div class="holiday-table">
+    <div class="holiday-table-header">
+        <span>Holiday List</span>
+        <div class="btn btn-primary open-modal-holiday">Add</div>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Day</th>
+                <th>Date</th>
+                <th>Holiday name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.Holidays.Where(h=>h.EndDate>=DateTime.Now.AddDays(-1)).ToList())
+            {
+                count++;
+
+                int days;
+                days = (DateTime.Parse(item.EndDate.ToString()) - DateTime.Parse(item.StartDate.ToString())).Days;
+                DateTime startDate = DateTime.Parse(item.StartDate.ToString());
+                DateTime endDate = DateTime.Parse(item.EndDate.ToString());
+            <tr data-id="@item.Id">
+                <td>@count</td>
+                @if (days > 1)
+                {
+                    <td>@startDate.DayOfWeek-@endDate.DayOfWeek</td>
+                    <td>@startDate.ToString("MMMM dd,yyyy")  -  @endDate.ToString("MMMM dd,yyyy") <span class="day-count">@days</span></td>
+                }
+                else
+                {
+                    <td>@DateTime.Parse(item.StartDate.ToString()).DayOfWeek</td>
+                    <td>@DateTime.Parse(item.StartDate.ToString()).ToString("MMMM dd,yyyy")</td>
+                }
+
+                <td>@item.Name</td>
+                <td name="btns">
+                    <a href="@Url.Action("edit",new {id=item.Id})" class="hol-edit"><i class="far fa-edit"></i></a>
+                    <a href="@Url.Action("delete",new {id=item.Id})" class="hol-delete"><i class="far fa-trash-alt"></i></a>
+                </td>
+            </tr>
+
+
+            }
+
+
+
+        </tbody>
+    </table>
+</div>
+
