@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LucidHR.Models;
+using LucidHR.Filter;
 namespace LucidHR.Controllers
 {
+    [Auth]
     public class HomeController : Controller
     {
         LucidEntities db = new LucidEntities();
@@ -14,7 +16,7 @@ namespace LucidHR.Controllers
         public ActionResult Index()
         {
  
-            Employee emp = (Employee)Session["login"];
+            Employee emp = (Employee)Session["user"];
             int userId = db.Users.FirstOrDefault(u => u.EmployeeId == emp.Id).Id;
             var todoList = db.Todolists.Where(l => l.UserId == userId);
 
@@ -29,7 +31,7 @@ namespace LucidHR.Controllers
         [HttpPost]
         public JsonResult createlist(string toDoTitle, DateTime toDoDate)
         {
-            Employee emp = (Employee)Session["login"];
+            Employee emp = (Employee)Session["user"];
             int userId = db.Users.FirstOrDefault(u => u.EmployeeId == emp.Id).Id;
             var todoList = db.Todolists.Where(l => l.UserId == userId);
             if (!String.IsNullOrWhiteSpace(toDoTitle) && toDoDate != null)
@@ -264,7 +266,7 @@ namespace LucidHR.Controllers
 
         public JsonResult pagenation(int page = 1)
         {
-            Employee emp = (Employee)Session["login"];
+            Employee emp = (Employee)Session["user"];
             int userId = db.Users.FirstOrDefault(u => u.EmployeeId == emp.Id).Id;
             var todoList = db.Todolists.Where(l => l.UserId ==userId);
             List<AddedList> addedList = new List<AddedList>();
@@ -314,7 +316,7 @@ namespace LucidHR.Controllers
 
         public JsonResult Deletelist(int[] id)
         {
-            Employee emp = (Employee)Session["login"];
+            Employee emp = (Employee)Session["user"];
             int userId = db.Users.FirstOrDefault(u => u.EmployeeId == emp.Id).Id;
             var todoList = db.Todolists.Where(l => l.UserId == userId);
             if (id != null)

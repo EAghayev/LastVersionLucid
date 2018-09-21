@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LucidHR.Models;
+using LucidHR.Filter;
 
 namespace LucidHR.Controllers
 {
+    [Auth]
     public class DepartmentsController : Controller
     {
         LucidEntities db = new LucidEntities();

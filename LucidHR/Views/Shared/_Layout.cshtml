@@ -46,7 +46,7 @@
     @RenderSection("departmentModal", required: false)
     @RenderSection("holidayModal", required: false)
     @{
-        LucidHR.Models.Employee emp = (LucidHR.Models.Employee)Session["login"];    
+        LucidHR.Models.Employee emp = (LucidHR.Models.Employee)Session["user"];    
     }
     <div class="main">
         <nav class="navbar navbar-expand-lg navbar-light">

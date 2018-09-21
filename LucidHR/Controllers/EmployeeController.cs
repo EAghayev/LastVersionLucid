@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using LucidHR.Models;
 using System.IO;
 using Simple.ImageResizer;
+using LucidHR.Filter;
 
 namespace LucidHR.Controllers
 {
-
+    [Auth]
     public class EmployeeController : Controller
     {
         LucidEntities db = new LucidEntities();

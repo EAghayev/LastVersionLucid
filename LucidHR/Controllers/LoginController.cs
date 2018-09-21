@@ -7,8 +7,10 @@ using System.Web;
 using System.Web.Mvc;
 using LucidHR.Models;
 using System.Web.Helpers;
+using LucidHR.Filter;
 namespace LucidHR.Controllers
 {
+    
     public class LoginController : Controller
     {
         // GET: Login
@@ -45,6 +47,7 @@ namespace LucidHR.Controllers
         LucidEntities db = new LucidEntities();
         public ActionResult Index()
         {
+            Session["login"] = null;
             return View();
         }
 
@@ -67,8 +70,8 @@ namespace LucidHR.Controllers
             if (Crypto.VerifyHashedPassword(db.Users.FirstOrDefault(u => u.Email == email).Password, password))
             {
                 Employee emp = db.Employees.Find(db.Users.FirstOrDefault(u => u.Email == email).EmployeeId);
-                Session["login"] = new Employee();
-                Session["login"] = emp;
+                Session["login"] = true;
+                Session["user"] = emp;
                 return RedirectToAction("index", "home");
             }
             Session["loginError"] = "Please fill inputs correctly";
