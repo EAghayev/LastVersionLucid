@@ -94,59 +94,59 @@
     </div>
     Session["deleteEvent"] = null;
 }
-<div class="events-content">
-    <div class="row">
-        <div class="col-lg-8 col-md-12">
-            <div id='calendar'></div>
-        </div>
-        <div class="col-lg-4">
-            <div class="add-event">
-                <button class="btn btn-primary" id="add-new-event">Add New Event</button>
+    <div class="events-content">
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div id='calendar'></div>
             </div>
+            <div class="col-lg-4">
+                <div class="add-event">
+                    <button class="btn btn-primary" id="add-new-event">Add New Event</button>
+                </div>
 
-            <div class="events">
-                <ul class="events-list">
-                    @foreach (var item in Model.Events.Take(4))
-                    {
-                    <li class="align-items-center justify-content-between">
-                        <div class="date">
-                            <span class="day">@item.StartDate.Value.Day</span>
-                            <span class="month">@item.StartDate.Value.ToString("MMM")</span>
-                            <span class="year">@item.StartDate.Value.Year</span>
-                        </div>
-                        <div class="event-content">
-                            <h4>@item.Title</h4>
-                            <p>@item.Desc</p>
-                            @if (item.Lacation != null)
-                            {
-                                <small>
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    @item.Lacation
-                                </small>
-                            }
+                <div class="events">
+                    <ul class="events-list">
+                        @foreach (var item in Model.Events.Take(4))
+                        {
+                            <li class="align-items-center justify-content-between">
+                                <div class="date">
+                                    <span class="day">@item.StartDate.Value.Day</span>
+                                    <span class="month">@item.StartDate.Value.ToString("MMM")</span>
+                                    <span class="year">@item.StartDate.Value.Year</span>
+                                </div>
+                                <div class="event-content">
+                                    <h4>@item.Title</h4>
+                                    <p>@item.Desc</p>
+                                    @if (item.Lacation != null)
+                                    {
+                                        <small>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            @item.Lacation
+                                        </small>
+                                    }
 
-                        </div>
-                        <button  class="event-delete mr-3 btn btn-outline-danger" data-link="@Url.Action("delete",new { id=item.Id})"><i class="far fa-trash-alt"></i></button>
-    
-                    </li>
-                    }
+                                </div>
+                                <button class="event-delete mr-3 btn btn-outline-danger" data-link="@Url.Action("delete",new { id=item.Id})"><i class="far fa-trash-alt"></i></button>
 
-                </ul>
-                <hr />
-                <div class="pages-btns mt-1 ml-3 pb-3">
-                    <div class="pages-btns-box">
-                        @{
-                            double pageCount = ViewBag.EventCount / 4.00;
-                            for (int i = 0; i < Math.Ceiling(pageCount); i++)
-                            {
-                                <a href="@Url.Action("index",new {page=i+1})" class="btn btn-info event-page">@(i + 1)</a>
-                            }
+                            </li>
                         }
-                    </div>
 
+                    </ul>
+                    <hr />
+                    <div class="pages-btns mt-1 ml-3 pb-3">
+                        <div class="pages-btns-box">
+                            @{
+                                double pageCount = ViewBag.EventCount / 4.00;
+                                for (int i = 0; i < Math.Ceiling(pageCount); i++)
+                                {
+                                    <a href="@Url.Action("index",new {page=i+1})" class="btn btn-info event-page">@(i + 1)</a>
+                                }
+                            }
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 

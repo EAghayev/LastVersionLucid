@@ -7,8 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet">
@@ -285,7 +284,7 @@
                 </ul>
                 <ul class="sidebar-main-menu">
                     <li>
-                        <a href="@Url.Action("index","home")" class="active">
+                        <a href="@Url.Action("index","home")">
                             <i class="icon-speedometer"></i> HR Dashboard
                         </a>
                     </li>
@@ -300,10 +299,10 @@
                         </a>
                     </li>
                     @*<li>
-                        <a href="@Url.Action("index","activities")">
-                            <i class="icon-badge"></i> Activities
-                        </a>
-                    </li>*@
+            <a href="@Url.Action("index","activities")">
+                <i class="icon-badge"></i> Activities
+            </a>
+        </li>*@
                     <li>
                         <a href="#" class="sidebar-dropdown-toggle">
                             <i class="icon-people"></i> Employees
@@ -325,69 +324,90 @@
                                     <span>--</span>Attendance
                                 </a>
                             </li>
-                            <li>
-                                <a href="@Url.Action("index","departments")">
-                                    <span>--</span>Departments
-                                </a>
-                            </li>
+
                         </ul>
                     </li>
-                    @*<li>
-                        <a href="#" class="sidebar-dropdown-toggle">
-                            <i class="icon-briefcase"></i> Accounts
-                            <i class="icon-arrow-left sidemenu-dropdown"></i>
-                        </a>
-                        <ul class="sidebar-dropdown-menu">
-                            <li>
-                                <a href="@Url.Action("payments","accounts")">
-                                    <span>--</span>Payments
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("expenses","accounts")">
-                                    <span>--</span>Expenses
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("invoices","accounts")">
-                                    <span>--</span>Invoices
-                                </a>
-                            </li>
-                        </ul>
-                    </li>*@
-                    @*<li>
-                        <a href="#" class="sidebar-dropdown-toggle">
-                            <i class="icon-people"></i> Payroll
-                            <i class="icon-arrow-left sidemenu-dropdown"></i>
-                        </a>
-                        <ul class="sidebar-dropdown-menu">
-                            <li>
-                                <a href="@Url.Action("payslip","payroll")">
-                                    <span>--</span>Payslip
-                                </a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("salary","payroll")">
-                                    <span>--</span>Employee Salary
-                                </a>
-                            </li>
-                        </ul>
-                    </li>*@
                     <li>
-                        <a href="#">
+                        <a href="@Url.Action("index","departments")">
+                           <i class="icon-briefcase"></i>Departments
+                        </a>
+                    </li>
+                    @*<li>
+            <a href="#" class="sidebar-dropdown-toggle">
+                <i class="icon-briefcase"></i> Accounts
+                <i class="icon-arrow-left sidemenu-dropdown"></i>
+            </a>
+            <ul class="sidebar-dropdown-menu">
+                <li>
+                    <a href="@Url.Action("payments","accounts")">
+                        <span>--</span>Payments
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("expenses","accounts")">
+                        <span>--</span>Expenses
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("invoices","accounts")">
+                        <span>--</span>Invoices
+                    </a>
+                </li>
+            </ul>
+        </li>*@
+                    @*<li>
+            <a href="#" class="sidebar-dropdown-toggle">
+                <i class="icon-people"></i> Payroll
+                <i class="icon-arrow-left sidemenu-dropdown"></i>
+            </a>
+            <ul class="sidebar-dropdown-menu">
+                <li>
+                    <a href="@Url.Action("payslip","payroll")">
+                        <span>--</span>Payslip
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("salary","payroll")">
+                        <span>--</span>Employee Salary
+                    </a>
+                </li>
+            </ul>
+        </li>*@
+                    <li>
+                        <a href="#" class="sidebar-dropdown-toggle">
                             <i class="icon-chart"></i> Report
+                            <i class="icon-arrow-left sidemenu-dropdown"></i>
                         </a>
+                        <ul class="sidebar-dropdown-menu">
+                            <li>
+                                <a href="@Url.Action("index","reports")">
+                                    <span>--</span>Attendance Report
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("department","reports")">
+                                    <span>--</span>Department Report
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Employees","reports")">
+                                    <span>--</span>Employee Report
+                                </a>
+                            </li>
+
+                        </ul>
                     </li>
+
                     @*<li>
-                        <a href="#">
-                            <i class="icon-user"></i> Users
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="icon-lock"></i> Authentication
-                        </a>
-                    </li>*@
+            <a href="#">
+                <i class="icon-user"></i> Users
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="icon-lock"></i> Authentication
+            </a>
+        </li>*@
                 </ul>
             </div>
         </div>
@@ -397,20 +417,18 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="now-action">
-                                <h2>
+                                <h2 class="navigation-link-main">
                                     <i class="fas fa-arrow-left sidebar-arrow"></i>Dashboard
                                 </h2>
-                                <u class="breadcrumbs">
+                                <ul class="breadcrumbs pl-0">
                                     <li>
                                         <i class="icon-home"></i>
                                     </li>
-                                    <li>
-                                        <span>/</span>
-                                    </li>
-                                    <li>
+                                   
+                                    <li class="navigation-link">
                                         <span>Dashboard</span>
                                     </li>
-                                </u>
+                                </ul>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
@@ -488,6 +506,6 @@
     <script src="~/Public/js/main.js"></script>
     @RenderSection("progressCircleJs", required: false)
     @*@RenderSection("fullcalendarScripts", required: false)*@
-    @RenderSection("dataTablesJs", required: false)
+    @RenderSection("dataTablesJs", required: false)x
 </body>
 </html>

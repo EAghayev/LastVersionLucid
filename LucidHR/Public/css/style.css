@@ -38,7 +38,7 @@ body {
         body .main::after {
             content: "";
             width: 5px;
-            height: 100vh;
+            height: 100%;
             position: fixed;
             top: 0;
             left: 0;
@@ -49,7 +49,7 @@ body {
         body .main::before {
             content: "";
             width: 5px;
-            height: 100vh;
+            height: 100%;
             position: fixed;
             top: 0;
             right: 0;
@@ -1176,14 +1176,23 @@ nav {
         border-radius: 8px;
         padding: 20px;
     }
+    #main-content .holiday-table td{
+        min-width:200px !important;
+    }
+        #main-content .holiday-table td:first-child{
+            min-width:20px !important;
+        }
+        #main-content .holiday-table td:last-child {
+            min-width: 105px !important;
+        }
 
         #main-content .holiday-table .holiday-table-header {
             padding-bottom: 20px;
             font-size: 16px;
             font-weight: 500;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         #main-content .holiday-table table {
@@ -1277,8 +1286,20 @@ nav {
     #data-table_filter {
         text-align: left !important;
     }
-
-
+    .main #main-content .main-content-items #department-list table tr td:last-child {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .selectboxesForReportDate select {
+        margin-bottom: 8px;
+    }
+    #searchAttendance{
+        margin-top:15px;
+        margin-right:15px;
+    }
+    .holiday-table {
+    }
     .navbar-right {
         flex-direction: row-reverse !important;
     }
@@ -1635,10 +1656,13 @@ nav {
     padding-top: 16px;
     border-radius: 8px;
 }
+.main #main-content .main-content-items #department-list table tr td:last-child{
+    min-width:70px !important;
+}
 
-    .main #main-content .main-content-items #department-list select {
-        font-size: 16px;
-    }
+.main #main-content .main-content-items #department-list select {
+    font-size: 16px;
+}
 
         .main #main-content .main-content-items #department-list select:focus {
             box-shadow: none;
@@ -2237,4 +2261,18 @@ width:600px;
 .event-delete:hover{
         /*color:darkred;
         border-color:darkred;*/
+}
+
+.report-main .nameTd{
+    width:180px !important;
+}
+.navigation-link {
+    position: relative;
+    text-transform: capitalize;
+}
+.navigation-link::before{
+    content:"/";
+}
+.navigation-link-main{
+    text-transform:capitalize;
 }

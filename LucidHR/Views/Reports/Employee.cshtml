@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section dataTablesStyle{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/basic.css" rel="stylesheet" />
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" rel="stylesheet" />*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+}
+@section dataTablesJs{
+    <!--boorstarp dataTable-->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="~/Public/js/magnific-popup.js"></script>
+    <script>
+//new Dropzone("#profile-upload", {
+                //    maxFiles: 1,
+                //    addRemoveLinks: true,
+                //})</script>
+}

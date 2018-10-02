@@ -1,7 +1,22 @@
 ﻿
 $(document).ready(function () {
 
-    
+    //months
+    //====================
+    var month = new Array();
+    month[1] = "January";
+    month[2] = "February";
+    month[3] = "March";
+    month[4] = "April";
+    month[5] = "May";
+    month[6] = "June";
+    month[7] = "July";
+    month[8] = "August";
+    month[9] = "September";
+    month[10] = "October";
+    month[11] = "November";
+    month[12] = "December";
+    //====================
 
 
     //Fill Roles oprions
@@ -32,7 +47,7 @@ $(document).ready(function () {
         var fl = this.files.length;
         var fd = new FormData();
         //for (var x = 0; x < fl; x++) {
-            fd.append("files", this.files[0]);
+        fd.append("files", this.files[0]);
         //}
         $.ajax({
             url: "/employee/upload",
@@ -40,7 +55,7 @@ $(document).ready(function () {
             dataType: "json",
             cache: false,
             contentType: false,
-            processData:false,
+            processData: false,
             data: fd,
             success: (function (response) {
                 var link = "/Public" + response.data.fileUrl;
@@ -65,7 +80,7 @@ $(document).ready(function () {
         var file = $(this).attr("data-file");
         $this = $(this);
         $.ajax({
-            url: "/employee/removefile?fileName="+file,
+            url: "/employee/removefile?fileName=" + file,
             type: "get",
             dataType: "json",
             success: function (response) {
@@ -78,7 +93,7 @@ $(document).ready(function () {
             }
         })
     })
-    
+
     //================================================================================
     //fill role options in add emp form
     //================================================================================
@@ -87,8 +102,8 @@ $(document).ready(function () {
         fillRoles()
     })
     //============================================================
-   //add form input controls
-  //============================================================
+    //add form input controls
+    //============================================================
 
     $('input[name="FullName"]').keydown(
         function (event) {
@@ -112,20 +127,20 @@ $(document).ready(function () {
                 }
                 toastr.error('Name and Surname must be less than 50 charactest')
             }
-            
+
             if (numberOfWords == 2 && event.keyCode == 32) {
                 var infoMessage = "Please,write only name and surname";
                 if ($(".toast-info").length > 0 && $(".toast-info .toast-message").text() == infoMessage) {
                     $(".toast-info").remove()
                 }
                 toastr.info(infoMessage)
-               
+
                 return false;
             }
         }
     );
 
-   
+
     //================================================================================
     //create emp
     //================================================================================
@@ -146,10 +161,7 @@ $(document).ready(function () {
             data: data,
             success: function (response) {
                 if (response.status == 200) {
-                    console.log(response.status)
                     var table = $(".table").DataTable();
-
-                    console.log("Dsfdsdf")
                     //add new emp tr
                     var empTr = ` <tr id="` + response.data.id + `">
                                     <td name="profile">
@@ -361,7 +373,6 @@ $(document).ready(function () {
 
                     //set emp updated data
                     var updatedTd = $('tr[id=' + response.data.id + ']')
-                    console.log(updatedTd)
 
                     updatedTd.find("td[name='name-email']").find("h6").text(response.data.name + " " + response.data.surname)
                     updatedTd.find("td[name='name-email']").find("span").text(response.data.email)
@@ -413,7 +424,6 @@ $(document).ready(function () {
         }
         var url = "";
         for (var i = 0; i < chkArray.length; i++) {
-            console.log(chkArray[i]);
             url += "id=" + chkArray[i] + "&";
         }
 
@@ -460,10 +470,6 @@ $(document).ready(function () {
                         }
                     })
                 })
-
-                //console.log($this.attr("href"))
-
-
             }
         })
     })
@@ -483,9 +489,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         var data = $("#add-to-do").serializeArray();
-        console.log(data.length)
 
-        console.log($("#add-to-do").attr("action"))
         $.ajax({
             url: $("#add-to-do").attr("action"),
             type: 'post',
@@ -502,27 +506,27 @@ $(document).ready(function () {
                         $(".pages-btns-box").append(btn);
                     }
                     $.getJSON("home/pagenation?page=1", function (response) {
-            $(".to-do-list").empty();
-            $.each(response.list, function (key, value) {
-                var isCompleted = value.isCompleted == true ? "line-through" : "";
-                var checked = value.isCompleted == true ? "checked" : "";
-                var list = `<li>
+                        $(".to-do-list").empty();
+                        $.each(response.list, function (key, value) {
+                            var isCompleted = value.isCompleted == true ? "line-through" : "";
+                            var checked = value.isCompleted == true ? "checked" : "";
+                            var list = `<li>
                             <div class="pretty p-svg p-curve to-do-checkbox">
-                                <input name="list" type="checkbox" value="`+ value.id + `" ` + checked +` />
+                                <input name="list" type="checkbox" value="`+ value.id + `" ` + checked + ` />
                                 <div class="state p-warning">
                                     <!-- svg path -->
                                     <svg class="svg svg-icon" viewBox="0 0 20 20">
                                         <path d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
                                               style="stroke: white;fill:white;"></path>
                                     </svg>
-                                    <label class=`+isCompleted+`>` + value.title +`</label>
+                                    <label class=`+ isCompleted + `>` + value.title + `</label>
                                 </div>
                             </div>
-                            <span>SCHEDULED FOR `+value.date+`</span>
+                            <span>SCHEDULED FOR `+ value.date + `</span>
                         </li>`;
-                $(".to-do-list").append(list)
-            })
-        })
+                            $(".to-do-list").append(list)
+                        })
+                    })
                     toastr.success(response.message)
                 }
                 else {
@@ -532,8 +536,8 @@ $(document).ready(function () {
         })
     })
 
-  
-         
+
+
     //=============================================================================================
     //To Do List
     //=============================================================================================
@@ -548,9 +552,7 @@ $(document).ready(function () {
         //e.preventDefault();
 
         var data = $("#add-to-do").serializeArray();
-        console.log(data.length)
 
-        console.log($("#add-to-do").attr("action"))
         $.ajax({
             url: "/home/createlist/",
             type: 'post',
@@ -559,7 +561,6 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.status == 200) {
                     $(".pages-btns-box").empty()
-                    console.log("blees dsdsnd")
                     for (var i = 0; i < response.data.page; i++) {
                         var btn = `<a href="home/pagenation?page=` + (i + 1) + `" class="btn btn-info todo-page">` + (i + 1) + `</a>`
                         $(".pages-btns-box").append(btn);
@@ -587,9 +588,8 @@ $(document).ready(function () {
                         })
                     })
                     $(".modal").hide()
-                    console.log($(".modal").css("display"))
                     toastr.success(response.message)
-                   
+
                 }
                 else {
                     toastr.error(response.message)
@@ -650,7 +650,7 @@ $(document).ready(function () {
                     url: link + url,
                     type: "get",
                     dataType: "json",
-                    success: function (response)    {
+                    success: function (response) {
                         if (response.status == 200) {
 
                             $('input[name="list"]:checked').each(function () {
@@ -729,18 +729,18 @@ $(document).ready(function () {
                     if ($(".toast-error").length > 0 && $(".toast-error .toast-message").text() == response.message) {
                         $(".toast-error").remove()
                     }
-               
+
                     toastr.error(response.message)
                 }
             })
         }
-        else{
+        else {
             $this.closest(".role-input-box").remove();
 
         }
     })
 
-     // delete department
+    // delete department
 
     $(".delete-dep").click(function (e) {
         e.preventDefault();
@@ -763,7 +763,6 @@ $(document).ready(function () {
 
     //Attendance table crud
     $("#attendance-list .attn-day").click(function () {
-        console.log($(this).attr("data-attn"))
         var $this = $(this);
         var day = $this.attr("data-day");
         var empId = $this.closest("tr").attr("data-id");
@@ -776,9 +775,7 @@ $(document).ready(function () {
             $this.attr("data-attn", "True");
             isAttn = true;
         }
-        console.log(isAttn)
         $.getJSON("/employee/empattendance?id=" + empId + "&day=" + day + "&isAttn=" + isAttn, function (response) {
-            console.log(response.status);
         })
     })
 
@@ -803,7 +800,7 @@ $(document).ready(function () {
                 $('input[name="Name"]').val(response.data.name)
                 $('input[name="StartDate"]').val(response.data.startDate)
                 $('input[name="EndDate"]').val(response.data.endDate)
-                $(".holiday-form").attr("action",url)
+                $(".holiday-form").attr("action", url)
             }
         })
     })
@@ -827,7 +824,7 @@ $(document).ready(function () {
             }
         })
     })
-    
+
     //Event Add
     //$("#event-add-form").submit(function (e) {
     //    e.preventDefault();
@@ -853,12 +850,9 @@ $(document).ready(function () {
     //                                    }
     //                                    var className;
     //                                    defaultDate = response.dateNow
-    //                                    console.log(defaultDate)
 
     //                                    $.each(response.data.evnt, function (key, value) {
     //                                        var date = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getMilliseconds();
-    //                                        //console.log(date)
-    //                                        //console.log(response.status)
     //                                        if (value.Type == "Optional") {
     //                                            className = "bg-dark"
     //                                        }
@@ -882,13 +876,12 @@ $(document).ready(function () {
     //                            }
     //                        })
 
-   
+
     //})
 
 
     //delete event
     $(".event-delete").click(function (element) {
-        console.log("Dsds")
         element.preventDefault();
         var url = $(this).attr("data-link");
 
@@ -907,7 +900,117 @@ $(document).ready(function () {
 
         })
     })
-
+    //================================================================================
+    //REPORTS
+    //================================================================================
+    //fill quoters start
+    $('select[name="reportYear"]').change(function () {
+        if ($(this).val() == "0") {
+            $('select[name="reportQuoter"]').empty();
+            $('select[name="reportQuoter"]').append(`<option value="0">All Quoters</option>`)
+            $('select[name="reportMonth"]').empty();
+            $('select[name="reportMonth"]').append(`<option value="0">All Months</option>`)
+        }
+        else {
+            $('select[name="reportQuoter"]').empty();
+            $('select[name="reportQuoter"]').append(`<option value="0">All Quoters</option>`)
+            for (var i = 0; i < 4; i++) {
+                var option = `<option value="` + (i + 1) + `">` + (i + 1) + `</option>`
+                $('select[name="reportQuoter"]').append(option)
+            }
+        }
     })
+    //fill quoters end
+
+    //fill months start
+    $('select[name="reportQuoter"]').change(function () {
+       quoter = $(this).val();
+        if ($(this).val() == "0") {
+            $('select[name="reportMonth"]').empty();
+            $('select[name="reportMonth"]').append(`<option value="0">All Months</option>`)
+        }
+        else if (quoter == 1) {
+            $('select[name="reportMonth"]').empty();
+            $('select[name="reportMonth"]').append(`<option value="0">All Months</option>`)
+            for (var i = 0; i < 3; i++) {
+                var option = `<option value="` + (i + 1) + `">` + month[i + 1] + `</option>`
+                $('select[name="reportMonth"]').append(option)
+            }
+        }
+        else if (quoter == 2) {
+            $('select[name="reportMonth"]').empty();
+            $('select[name="reportMonth"]').append(`<option value="0">All Months</option>`)
+            for (var i = 3; i < 6; i++) {
+                var option = `<option value="` + (i + 1) + `">` + month[i + 1] + `</option>`
+                $('select[name="reportMonth"]').append(option)
+            }
+        }
+        else if (quoter == 3) {
+            $('select[name="reportMonth"]').empty();
+            $('select[name="reportMonth"]').append(`<option value="0">All Months</option>`)
+            for (var i = 6; i < 9; i++) {
+                var option = `<option value="` + (i + 1) + `">` + month[i + 1] + `</option>`
+                $('select[name="reportMonth"]').append(option)
+            }
+        }
+        else {
+            $('select[name="reportMonth"]').empty();
+            $('select[name="reportMonth"]').append(`<option value="0">All Months</option>`)
+            for (var i = 9; i < 12; i++) {
+                var option = `<option value="` + (i + 1) + `">` + month[i + 1] + `</option>`
+                $('select[name="reportMonth"]').append(option)
+            }
+        }
+    })
+    //fill months end
+
+    //search attendance
+    $("#searchAttendance").click(function () {
+        var selectedYear = $('select[name="reportYear"]').val();
+        var selectedQuoter = $('select[name="reportQuoter"]').val();
+        var selectedMonth = $('select[name="reportMonth"]').val();
+        var url = "/reports/attendance?year=" + selectedYear + "&quoter=" + selectedQuoter + "&month=" + selectedMonth;
+        $.getJSON(url, function (response) {
+            console.log(response.data)
+            var table = $(".table").DataTable();
+            //add new emp tr
+            var i = 0;
+            table.clear().draw();
+            $.each(response.data, function (key,value) {
+                var empTr = ` <tr>
+
+                                    <td class="nameTd" data-toggle="tooltip2" data-placement="top" data-html="true" title="LA-`+ value.employee.Id + `<br> ` + value.employee.JoinDate + `">
+                                   `+ value.employee.Name + ` ` + value.employee.Surname+` 
+                                </td>   
+                                <td data-toggle="tooltip2" data-placement="top" title="`+ value.withoutLeaveDayString+`">
+                                  `+ value.withoutLeaveDays+`
+                                </td>
+                                <td data-toggle="tooltip2" data-placement="top" title="`+ value.leaveDayString+`">
+                                    `+ value.leaveDays+`
+                                </td>
+                                <td data-toggle="tooltip2" data-placement="top" title="`+ value.holiDayString+`">
+                                    `+ value.holiDays+`
+                                </td>
+                                <td data-toggle="tooltip2" data-placement="top">
+                                   `+ value.totalDays+`
+                                </td>
+                                </tr>`
+
+                var rowHtml = empTr;
+                table.row.add($(rowHtml)).draw();
+                i++;
+            })
+            $('[data-toggle="tooltip2"]').tooltip();
+          
+
+
+          
+        })
+    })
+
+
+
+
+})
 
 

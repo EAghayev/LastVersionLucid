@@ -75,7 +75,7 @@ namespace LucidHR.Controllers
 
                     for (int i = 0; i < Role.Length; i++)
                     {
-                        if (Role[i] == "")
+                        if (String.IsNullOrEmpty(Role[i]))
                         {
                             continue;
                         }
@@ -249,6 +249,10 @@ namespace LucidHR.Controllers
                 {
                     for (int i = roleIdLength; i < roleLength; i++)
                     {
+                        if (String.IsNullOrWhiteSpace(Role[i]))
+                        {
+                            continue;
+                        }
                         Role rol = new Role
                         {
                             Name = Role[i],

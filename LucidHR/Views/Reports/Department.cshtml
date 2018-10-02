@@ -1,0 +1,80 @@
+﻿@model LucidHR.Models.ViewHome
+@{
+    ViewBag.Title = "Department";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int salary = 0;
+}
+
+@section dataTablesStyle{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/basic.css" rel="stylesheet" />
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" rel="stylesheet" />*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+}
+@section dataTablesJs{
+    <!--boorstarp dataTable-->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="~/Public/js/magnific-popup.js"></script>
+    <script>
+//new Dropzone("#profile-upload", {
+                //    maxFiles: 1,
+                //    addRemoveLinks: true,
+                //})</script>
+}
+
+<div class="main-content-items report-main">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="employee-list">
+                <div class="list-header">
+                    <h6>Attendance report</h6>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="data-table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Department</th>
+                                <th>Head</th>
+                                <th>Employees</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Departments)
+                            {
+                                string headNameSurname = "";
+                                string headMail = "";
+                                string headEmpId = "";
+                                string headSalary = "";
+                                foreach (var emp in Model.Employees.Where(e => e.Role.DepartmentId == item.Id).ToList())
+                                {
+                                    salary += Convert.ToInt32(emp.Salary);
+                                }
+                                if (item.Head != null)
+                                {
+                                    headNameSurname = Model.Employees.FirstOrDefault(e => e.Id == item.Head).Name + " " + Model.Employees.FirstOrDefault(e => e.Id == item.Head).Surname;
+                                    headMail = Model.Employees.FirstOrDefault(e => e.Id == item.Head).Email;
+                                    headEmpId = "LA-" + Model.Employees.FirstOrDefault(e => e.Id == item.Head).Id;
+                                    headSalary = Convert.ToInt32(Model.Employees.FirstOrDefault(e => e.Id == item.Head).Salary) + "$";
+                                }
+                            <tr>
+                                <td class="nameTd" data-toggle="tooltip2" data-placement="top" data-html="true" title="@headMail <br>  @headEmpId <br> @headSalary">@item.Name</td>
+                                <td >@headNameSurname</td>
+                                <td>@Model.Employees.Where(e=>e.Role.DepartmentId==item.Id).Count()</td>
+                                <td>@salary $</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

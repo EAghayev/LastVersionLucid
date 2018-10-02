@@ -38,6 +38,21 @@
         </div>
     </div>
 }
+@section dataTablesStyle{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+}
+@section dataTablesJs{
+    <!--boorstarp dataTable-->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="~/Public/js/magnific-popup.js"></script>
+    <script>//new Dropzone("#profile-upload", {
+        //    maxFiles: 1,
+        //    addRemoveLinks: true,
+        //})</script>
+}
 @if (Session["inputError"] != null)
 {
     <div id="toast-container" class="toast-top-right">
@@ -61,52 +76,50 @@
         <span>Holiday List</span>
         <div class="btn btn-primary open-modal-holiday">Add</div>
     </div>
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th>#</th>
-                <th>Day</th>
-                <th>Date</th>
-                <th>Holiday name</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model.Holidays.Where(h=>h.EndDate>=DateTime.Now.AddDays(-1)).ToList())
-            {
-                count++;
-
-                int days;
-                days = (DateTime.Parse(item.EndDate.ToString()) - DateTime.Parse(item.StartDate.ToString())).Days;
-                DateTime startDate = DateTime.Parse(item.StartDate.ToString());
-                DateTime endDate = DateTime.Parse(item.EndDate.ToString());
-            <tr data-id="@item.Id">
-                <td>@count</td>
-                @if (days > 1)
+    <div class="table-responsive">
+        <table class="table table-striped" id="data-table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Holiday name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Holidays.Where(h => h.EndDate >= DateTime.Now.AddDays(-1)).ToList())
                 {
-                    <td>@startDate.DayOfWeek-@endDate.DayOfWeek</td>
-                    <td>@startDate.ToString("MMMM dd,yyyy")  -  @endDate.ToString("MMMM dd,yyyy") <span class="day-count">@days</span></td>
+                    count++;
+
+                    int days;
+                    days = (DateTime.Parse(item.EndDate.ToString()) - DateTime.Parse(item.StartDate.ToString())).Days;
+                    DateTime startDate = DateTime.Parse(item.StartDate.ToString());
+                    DateTime endDate = DateTime.Parse(item.EndDate.ToString());
+                    <tr data-id="@item.Id">
+                        <td>@count</td>
+                        @if (days > 1)
+                        {
+                            <td>@startDate.DayOfWeek-@endDate.DayOfWeek</td>
+                            <td>@startDate.ToString("MMMM dd,yyyy")  -  @endDate.ToString("MMMM dd,yyyy") <span class="day-count">@days</span></td>
+                        }
+                        else
+                        {
+                            <td>@DateTime.Parse(item.StartDate.ToString()).DayOfWeek</td>
+                            <td>@DateTime.Parse(item.StartDate.ToString()).ToString("MMMM dd,yyyy")</td>
+                        }
+                        <td>@item.Name</td>
+                        <td name="btns">
+                            <a href="@Url.Action("edit",new {id=item.Id})" class="hol-edit"><i class="far fa-edit"></i></a>
+                            <a href="@Url.Action("delete",new {id=item.Id})" class="hol-delete"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+
+
                 }
-                else
-                {
-                    <td>@DateTime.Parse(item.StartDate.ToString()).DayOfWeek</td>
-                    <td>@DateTime.Parse(item.StartDate.ToString()).ToString("MMMM dd,yyyy")</td>
-                }
 
-                <td>@item.Name</td>
-                <td name="btns">
-                    <a href="@Url.Action("edit",new {id=item.Id})" class="hol-edit"><i class="far fa-edit"></i></a>
-                    <a href="@Url.Action("delete",new {id=item.Id})" class="hol-delete"><i class="far fa-trash-alt"></i></a>
-                </td>
-            </tr>
+            </tbody>
+        </table>
+    </div>
 
-
-            }
-
-
-
-        </tbody>
-    </table>
 </div>
-

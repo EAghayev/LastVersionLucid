@@ -416,13 +416,17 @@ namespace LucidHR.Controllers
 
                                 DateTime day = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
 
+
                                 for (int i = 0; i < DateTime.DaysInMonth(DateTime.Today.Year,DateTime.Today.Month); i++)
                                 {
                                     bool isAttn;
-                                    day=day.AddDays(i);
-                                    if (JoinDate <= day)
+                                    int count = i + 1;
+                                    DateTime currentDay = new DateTime(DateTime.Today.Year, DateTime.Today.Month, count);
+
+                                    
+                                    if (JoinDate <= currentDay)
                                      {
-                                        if (day.DayOfWeek.ToString() == "Sunday" || day.DayOfWeek.ToString() == "Saturday")
+                                        if (currentDay.DayOfWeek.ToString() == "Sunday" || currentDay.DayOfWeek.ToString() == "Saturday")
                                         {
                                             isAttn = false;
                                         }
@@ -430,10 +434,11 @@ namespace LucidHR.Controllers
                                         {
                                             isAttn = true;
                                         }
+
                                         Attendance atn = new Attendance
                                         {
                                             EmployeeId = db.Employees.FirstOrDefault(e => e.Email == myEmp.Email && e.Phone == myEmp.Phone).Id,
-                                            Date = day,
+                                            Date = currentDay,
                                             Atd = isAttn
                                         };
                                         db.Attendances.Add(atn);
@@ -441,6 +446,7 @@ namespace LucidHR.Controllers
                                         day = day.AddDays(1);
                                     }
                                 }
+                              
 
 
                                 Employee emp = db.Employees.FirstOrDefault(e => e.Email == myEmp.Email);

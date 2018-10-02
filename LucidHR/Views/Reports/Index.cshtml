@@ -1,0 +1,157 @@
+﻿@model LucidHR.Models.ViewHome
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section dataTablesStyle{
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/basic.css" rel="stylesheet" />
+    @*<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.css" rel="stylesheet" />*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+}
+@section dataTablesJs{
+    <!--boorstarp dataTable-->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.5.1/dropzone.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <script src="~/Public/js/magnific-popup.js"></script>
+    <script>
+//new Dropzone("#profile-upload", {
+                //    maxFiles: 1,
+                //    addRemoveLinks: true,
+                //})</script>
+}
+
+<div class="main-content-items report-main">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="employee-list">
+                <div class="list-header">
+                    <div class="row w-100">
+                        <div class="col-md-2">
+                            <h6>Attendance report</h6>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="row justify-content-end selectboxesForReportDate">
+                                <div class="col-md-3">
+                                    <select name="reportYear" class=" form-control form-control-sm">
+                                        <option value="0">All Years</option>
+                                        @foreach (var item in Model.Employees.Select(e => e.JoinDate.Value.Year).Distinct())
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select name="reportQuoter" class="form-control form-control-sm">
+                                        <option value="0">All Quoters</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <select name="reportMonth" class="form-control form-control-sm">
+                                        <option value="0">All Months</option>
+
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" id="searchAttendance">Search</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+                 
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped" id="data-table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Employee</th>
+                                <th>Without Leave</th>
+                                <th>Leave Days</th>
+                                <th>Holidays</th>
+                                <th>Total Leave day</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Employees)
+                            {
+                            <tr>
+                                @{
+                                    DateTime day = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                                    int dayCount = 0;
+                                    string dayCountToolTip = "";
+
+                                    int leaveDays = 0;
+                                    string leaveDaysToolTip = "";
+
+                                    int holidayCount = 0;
+                                    string holidayCountToolTip = "";
+
+                                }
+                                @for (int i = 1; i <= DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month); i++)
+                                {
+                                    DateTime currentDay = new DateTime(DateTime.Today.Year, DateTime.Today.Month, i);
+                                    if (Model.Attendances.FirstOrDefault(a => a.EmployeeId == item.Id && a.Date.Value.ToShortDateString() == currentDay.ToShortDateString()) != null)
+                                    {
+                                        bool atn = Model.Attendances.FirstOrDefault(a => a.EmployeeId == item.Id && a.Date.Value.ToShortDateString() == currentDay.ToShortDateString()).Atd;
+                                        if (atn == false)
+                                        {
+                                            if (currentDay.DayOfWeek.ToString() != "Saturday" && currentDay.DayOfWeek.ToString() != "Sunday")
+                                            {
+                                                dayCount++;
+                                                dayCountToolTip += " " + currentDay.ToString("dd.MM.yyyy");
+                                            }
+                                            if (Model.LeaveRequests.FirstOrDefault(l => l.EmployeeId == item.Id) != null)
+                                            {
+                                                if (Model.LeaveRequests.FirstOrDefault(l => l.EmployeeId == item.Id).StratDate <= currentDay && Model.LeaveRequests.FirstOrDefault(l => l.EmployeeId == item.Id).FinishDate > currentDay)
+                                                {
+                                                    leaveDaysToolTip += " " + currentDay.ToString("dd.MM.yyyy");
+                                                    leaveDays++;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    if (Model.LeaveRequests.FirstOrDefault(l => l.EmployeeId == item.Id) != null)
+                                    {
+                                        if (Model.LeaveRequests.FirstOrDefault(l => l.EmployeeId == item.Id).StratDate <= currentDay && Model.LeaveRequests.FirstOrDefault(l => l.EmployeeId == item.Id).FinishDate > currentDay)
+                                        {
+                                            leaveDaysToolTip += " " + currentDay.ToString("dd.MM.yyyy");
+                                            leaveDays++;
+                                        }
+                                    }
+                                    if (Model.Holidays.FirstOrDefault(h => h.StartDate <= currentDay && h.EndDate > currentDay) != null)
+                                    {
+                                        holidayCount++;
+                                        holidayCountToolTip += " " + currentDay.ToString("dd.MM.yyyy");
+                                    }
+                                }
+                                <td class="nameTd" data-toggle="tooltip2" data-placement="top" data-html="true" title="LA-@item.Id<br>  @item.JoinDate.Value.ToShortDateString()">
+                                    @item.Name @item.Surname
+                                </td>   
+                                <td data-toggle="tooltip2" data-placement="top" title="@dayCountToolTip">
+                                    @dayCount
+                                </td>
+                                <td data-toggle="tooltip2" data-placement="top" title="@leaveDaysToolTip">
+                                    @leaveDays
+                                </td>
+                                <td data-toggle="tooltip2" data-placement="top" title="@holidayCountToolTip">
+                                    @holidayCount
+                                </td>
+                                <td data-toggle="tooltip2" data-placement="top" title="@holidayCountToolTip">
+                                   @(leaveDays+dayCount+holidayCount)
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

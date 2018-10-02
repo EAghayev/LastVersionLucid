@@ -1,12 +1,54 @@
-$(document).ready(function () {
 
+$(document).ready(function () {
+ 
     if ($("#toast-container").length > 0) {
-        console.log("Aaaa")
         $("#toast-container").fadeOut(2500);
     }
 
- 
 
+    if ($(".report-main").length > 0) {
+        $('[data-toggle="tooltip2"]').tooltip();
+    }
+ 
+    //navigation active
+    var current = location.pathname.split("/");
+    $('.sidebar-main-menu li').each(function () {
+        $(this).find(".active").removeClass("active")
+    })
+    $('.sidebar-main-menu li a').each(function () {
+        var $this = $(this);
+
+        // if the current path is like this link, make it active
+        if (current[1] == "" || current[1] == "home" || current[1] == "Home") {
+            if ($this.attr('href') == "/") {
+                $this.addClass('active')
+            }
+        }
+        else if ($this.attr('href').includes(current[1])) {
+            if ($this.parents().eq(1).prev().hasClass("sidebar-dropdown-toggle")) {
+                $this.parents().eq(1).prev().addClass("active")
+                return
+            }
+            else {
+                $this.addClass('active');
+            }
+
+        }
+    })
+    if (current[1] == "") {
+        current[1]="Dashboard"
+    }
+    $(".navigation-link-main").text(current[1])
+
+    //navigation breadcrumbs
+    $('.main-content-header').find('.navigation-link').remove('.navigation-link')
+    for (var i = 1; i < current.length; i++) {
+        if (current[i] == "") {
+          current[i]="Dashboard"
+        }
+        var breadcrumbLink = `<li class="navigation-link"><span>` + current[i] + `</span></li>`
+        $('.main-content-header').find('.breadcrumbs').append(breadcrumbLink)
+    }
 
 
    //dt-picker
@@ -187,11 +229,9 @@ $(window).click(function(e){
                 }
                 var className;
                 defaultDate = response.dateNow
-                console.log(defaultDate)
                 $.each(response.data.evnt, function (key, value) {
                     var date = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getMilliseconds();
-                    //console.log(date)
-                    //console.log(response.status)
+                  
                     if (value.Type == "Optional") {
                         className = "bg-dark"
                     }
@@ -205,7 +245,6 @@ $(window).click(function(e){
                     events.push(event);
                 })
 
-                console.log(events[0].start)
                 $('#calendar').fullCalendar({
                     //header: {
                     //    left: 'prev,next today',
@@ -237,14 +276,12 @@ $(window).click(function(e){
                     },
                     eventResize: function (event, delta, revertFunc) {
 
-                        console.log(event.end._d)
                     },
                     drop: function () {
                         // is the "remove after drop" checkbox checked?
                         if ($('#drop-remove').is(':checked')) {
                             // if so, remove the element from the "Draggable Events" list
                             $(this).remove();
-                            console.log($(this))
                         }
                     },
                     eventLimit: true, // allow "more" link when too many events
@@ -277,6 +314,7 @@ $(window).click(function(e){
                 $("#circle-first").circleProgress({
                     progress: 0.75,
                     thickness: 8,
+                    value: response.data.male/100,
                     percentage: true,
                     lineCap: 'round',
                     size: 95,
@@ -290,6 +328,7 @@ $(window).click(function(e){
 
                 $("#circle-second").circleProgress({
                     progress: 0.75,
+                    value: response.data.female/100,
                     thickness: 8,
                     percentage: true,
                     lineCap: 'round',
@@ -303,10 +342,7 @@ $(window).click(function(e){
                 })
             }
         });
-           
-    
-          
-                }
+    }
 
 //=============================================================================
 //Add new in modal
@@ -377,7 +413,6 @@ if($("#attendance-list").length){
     //Leave Requests
 
     $(".request-reject").click(function (e) {
-        console.log("sss")
         var url = $(this).attr("href")
         e.preventDefault(); 
         swal({
@@ -416,7 +451,6 @@ if($("#attendance-list").length){
     })
 
     $('input[name="LeaveTypeId"]').change(function () {
-        console.log($(this).val())
     })
 
     ////leave-form submit inputs controls
@@ -497,9 +531,11 @@ if($("#attendance-list").length){
     })
 
     //
-    if ($("#attendance-list").length > 0) {
+
+    if ($("#attendance-list").length > 0 || $(".report-main").length>0) {
        
-        $('[data-toggle="tooltip"]').tooltip(); 
+    $('[data-toggle="tooltip"]').tooltip();
+
     }
     
     //Events
@@ -508,5 +544,11 @@ if($("#attendance-list").length){
         $(".modal-overlay").css("display", "block")
         $("body").css("overflow", "hidden")
     })
+
+    if ($(".holiday-table")) {
+        $(".dataTables_filter").parents().eq(1).remove();
+    }
+
 })
+
 

@@ -94,6 +94,7 @@ C:\Users\Eagha\source\repos\LucidHR\LucidHR\obj\Debug\LucidHR.csproj.CoreCompile
 C:\Users\Eagha\source\repos\LucidHR\LucidHR\obj\Debug\LucidHR.csproj.CopyComplete
 C:\Users\Eagha\source\repos\LucidHR\LucidHR\obj\Debug\LucidHR.dll
 C:\Users\Eagha\source\repos\LucidHR\LucidHR\obj\Debug\LucidHR.pdb
+C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\EntityFramework.xml
 C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\ApplicationInsights.config
 C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\LucidHR.dll.config
 C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\LucidHR.dll
@@ -169,7 +170,6 @@ C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\System.Web.WebPages.Deploym
 C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\System.Web.WebPages.dll
 C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\System.Web.WebPages.Razor.dll
 C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\WebGrease.dll
-C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\EntityFramework.xml
 C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\EntityFramework.SqlServer.xml
 C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\System.Web.Helpers.xml
 C:\Users\Eagha\Desktop\HR-Backend-master\LucidHR\bin\System.Web.Mvc.xml
