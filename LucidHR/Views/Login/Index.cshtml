@@ -1,4 +1,6 @@
-﻿
+﻿@using LucidHR.Models;
+@using LucidHR.Helper;
+@using LucidHR.App_LocalResources;
 @{
     Layout = null;
 }
@@ -13,7 +15,8 @@
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">*@
+    <link href="~/Public/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Public/css/style.css">
 </head>
 <body>
@@ -47,28 +50,28 @@
             Session["resetPassword"] = null;
 
         }
-        
+
         <div class="login-content">
             <div class="form">
                 <div class="logo"><img src="~/Public/images/logo-white.svg" alt="Lucid"></div>
                 <div class="login-form">
-                    <h5 class="form-header">Login to your account</h5>
+                    <h5 class="form-header">@GlobalRes.LoginToYourAccount</h5>
                     <form action="@Url.Action("login")" method="post" autocomplete="on">
                         <div class="form-content">
                             <div class="form-group">
-                                <input type="email" class="form-control" name="email" placeholder="Email" required>
+                                <input type="email" class="form-control" name="email" placeholder="@GlobalRes.Email" required>
                             </div>
                             <div class="form-group">
-                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="@GlobalRes.Password" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn log-btn">LOGIN</button>
+                        <button type="submit" class="btn log-btn">@GlobalRes.Login</button>
                     </form>
                     <div class="forgot account">
-                        <i class="fas fa-lock"></i><a href="@Url.Action("forgot")">Forgot password?</a>
+                        <i class="fas fa-lock"></i><a href="@Url.Action("forgot")">@GlobalRes.ForgotPass?</a>
                     </div>
                     <div class="register account">
-                        <span>Don't have an account?</span><a href="@Url.Action("register")">Register</a>
+                        <span>@GlobalRes.DontHaveAnAccount?</span><a href="@Url.Action("register")">@GlobalRes.Register</a>
                     </div>
                 </div>
             </div>

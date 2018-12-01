@@ -159,10 +159,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_LocalResources\GlobalRes.az.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalRes.az.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_LocalResources\GlobalRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GlobalRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Attributes\LocalizationAttribute.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DepartmentsController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
@@ -174,6 +186,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\LanguageHelper.cs" />
     <Compile Include="Models\AddedEmp.cs" />
     <Compile Include="Models\AddedList.cs" />
     <Compile Include="Models\Attendance.cs">
@@ -270,6 +283,16 @@
       <DependentUpon>Database.edmx</DependentUpon>
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
+    <Content Include="Public\Bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Public\Bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Public\Bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Public\Bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Public\Bootstrap\css\bootstrap.css" />
+    <Content Include="Public\Bootstrap\css\bootstrap.min.css" />
+    <Content Include="Public\Bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Public\Bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Public\Bootstrap\js\bootstrap.js" />
+    <Content Include="Public\Bootstrap\js\bootstrap.min.js" />
     <Content Include="Public\charts\chartist-plugin-tooltip\.gitignore" />
     <Content Include="Public\charts\chartist-plugin-tooltip\dist\chartist-plugin-tooltip.css" />
     <Content Include="Public\charts\chartist-plugin-tooltip\dist\chartist-plugin-tooltip.js" />
@@ -650,6 +673,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Models\Database.edmx">
@@ -781,9 +805,29 @@
     <Content Include="Views\Reports\Index.cshtml" />
     <Content Include="Views\Reports\Department.cshtml" />
     <Content Include="Views\Reports\Employee.cshtml" />
+    <Content Include="Public\Bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Public\Bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Public\Bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Public\Bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Public\Bootstrap\css\bootstrap.css.map" />
+    <Content Include="Public\Bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Public\Bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Public\Bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Public\Bootstrap\js\bootstrap.js.map" />
+    <Content Include="Public\Bootstrap\js\bootstrap.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_LocalResources\GlobalRes.az.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalRes.az.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="App_LocalResources\GlobalRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
